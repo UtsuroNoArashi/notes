@@ -1,7 +1,4 @@
-# About
-A collection of notes written in LaTeX during my master in CS.
-
-## Projects structure
+# Projects structure
 To allow a better management of each project, 
     we choosed to use the `subfiles` package, as allows files as these are part of a module.
     Additionaly, to keep things structured, each project is built using the same broad structure shown below.   
