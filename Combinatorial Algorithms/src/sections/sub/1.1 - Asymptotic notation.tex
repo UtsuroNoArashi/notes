@@ -1,0 +1,32 @@
+\documentclass{subfiles}
+\begin{document}
+    That idea behind asymptotic notation is that of analyzing algorithms,
+        with respect to a given resource, more often then not being time,
+        without caring about constants.
+
+    We recall the existence of three major notation: the \emph{omega} notation 
+        (\(\Omega\)), the \emph{theta} notation (\(\Theta\)) and the big-o notation 
+        (\(\mathcal{O}\)). Let \(g(n) \text{ and } f(n)\) be two functions,
+        then we define each notation as follow:
+        \[\begin{aligned}
+            \omegaOf{f(n)} =& \set{g(n)}[ %
+                \exists c > 0, n_{0} \ge 0 \text{ s.t. } %
+                    g(n) \ge cf(n), \forall n \ge n_{0}%
+            ]\\ 
+            %
+            \thetaOf{f(n)} =& \set{g(n)}[ %
+                \exists c_{1}, c_{2} > 0, n_{0} \ge 0 \text{ s.t. } %
+                    c_{1}f(n) \le g(n) \le c_{2}f(n), \forall n \ge n_{0} %
+            ]\\ 
+            % 
+            \bigO{f(n)} =& \set{g(n)}[ %
+                \exists c, n_{0} \ge 0 \text{ s.t. } %
+                    g(n) \le cf(n), \forall n \ge n_{0} %
+            ]
+        \end{aligned}\]
+
+    Although we give the definition in set notation, 
+        we write \(g(n) = \bigO{f(n)}\) to mean \(g(n) \in \bigO{f(n)}\);
+        we do similarly for the other notations. Additionally,
+        unless stated otherwise, assume we are interested in the time complexity of the algorithm.
+\end{document}

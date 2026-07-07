@@ -1,0 +1,33 @@
+\documentclass{subfiles}
+\begin{document}
+    Let us consider the following: assume we are given a data structure,
+        and we are asked to compute a sequence of \(m\) operations on it;
+        what is the overall complexity of all \(m\) operations, i.e,
+        what is the time needed to compute all \(m\) operations.
+
+    It follows easily that, applying a worst case analysis,
+        we need \(m \cdot T_{MAX}(n)\), where \(T_{MAX}(n)\) 
+        is the time complexity of the most expesive operation.
+        For instance, under the worst case assumption,
+        a sequence of \(m\) deletion from a tree has a complexity of \(\bigO{m \cdot n}\).
+
+    We now introduce the notion of \emph{amortized analysis},
+        and show how, over a sequence of operations, 
+        the real time complexity of an algorithm differs from the worst case one.
+
+    In its essence, amortized analysis does nothing more than averaging the complexity of 
+        all operations. That is, if \(T_{1}(n)\) is the complexity of the first operation,
+        \(T_{2}(n)\) the one for the second operation, \(\ldots\), 
+        \(T_{m}(n)\) the complexity of the \(m\)-th operation, 
+        then the amortized time is given as 
+        \[
+            T_{amortized}(n) = \frac{1}{n} \sum_{i = 1}^{m} T_{i}(n).
+        \]
+        In other words, amortized time represents the time needed for each of 
+        the \(m\) operations.
+
+    The next two sections describe two ways to perform amortized analysis.
+    % TODO: describe both accounting and potential method to perform amortized analysis.
+    % \subsubsection{Accounting method}
+    % \subfile{../subsub/1.2.1 - Accounting method}
+\end{document}
