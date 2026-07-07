@@ -1,0 +1,31 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure}[!hb]
+        \centering
+        \begin{tikzpicture}
+            [
+                internalNode/.style = {draw, circle, minimum size = 0.125},
+                every label/.style = {font = \ttfamily\scriptsize},
+            ]
+
+
+            \graph[layered layout, nodes=internalNode, edge quotes={font=\ttfamily\footnotesize, anchor=center, fill=rpBase}]{
+                "" [fill=rpLove] -- {
+                    "" ["a" below, >"0", > minimum layers=2],
+                    "" [fill=rpGold, >"1"] -- {
+                        "" ["g" below, >"0"],
+                        "" ["b" below, >"1"],
+                        "" ["c" below, >"2"]
+                    },                    
+                    "" [fill=rpRose, >"2"] -- {
+                        "" ["e" below, >"0"],
+                        "" ["f" below, >"1"],
+                        "" ["d" below, >"2"]
+                    }
+                }
+            };
+        \end{tikzpicture}
+        \caption{Huffman tree for the source \(S\).}
+        \label{fig:exampleHuffman}
+    \end{figure}
+\end{document}

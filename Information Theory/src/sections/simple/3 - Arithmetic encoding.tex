@@ -1,0 +1,49 @@
+\documentclass{subfiles}
+\begin{document}\label{sec:arithmeticEncoding}
+    In \Cref{sec:huffmanCodes}, we said that Huffman encoding was proposed by D. A. Huffman 
+        as answer to Fano's question. Huffman's answer wasn't the only one. 
+        In fact another of Fano's student, Peter Elias,
+        suggested a technique which came to be known as Arithmetic encoding.
+
+    The core idea is extreamly simple: instead of defining a codeword for each 
+        symbol, we encode the whole text in one go. More precisely, 
+        the text is encoded as decimal number in the range [0, 1].
+    
+    Algorithmically speaking, we proceed as follow: divide the range [0, 1]
+        in to \(n\) subintervals, each proportional to the probability of a distinc symbol,
+        which we can assume to be lexicographically sorted; each time a symbol 
+        of the input text is read, select the corresponding subintervals and 
+        repeat the splitting procedure. Once the whole text is read, 
+        output a decimal number within the last interval.
+
+    Below we provide the pseudo-code of the procedure just described.
+    \subfile{../../TikZ/Procedure - Arithmetic encoding}
+
+    \begin{example*}
+        Consider the string \(S = abac\), how do we encode it? 
+            By apply the encoding procedure we get the following.
+
+            \subfile{../../TikZ/Figure - Example of Arithmetic encoding}
+    \end{example*}
+
+    The question now is: how many bits do we need? Some result in number theory,
+        allows us to say that we need excatly \(\ceil{\log\sfrac{2}{s}}\) bits.
+
+    The decoding process is symmetric: the range [0, 1] is divided in \(n\)
+        subintervals, at each iteration the proper range is selected and 
+        the intervals recomputed accordingly. The process is valid 
+        because the procedure is syncronized; that is,
+        both encoder and decoder know the source alphabet and the associated probabilities.
+        Below the pseudo-code code of the procedure to decode a string encoded with Arithmetic encoding.
+
+    \subfile{../../TikZ/Procedure - Arithmetic decoding.tex}
+    \begin{example*}
+        Consider \(x = \sfrac{39}{128}\). If the source symbols and probabilities 
+            are that of the previous example, what is the decoded string?
+
+            \subfile{../../TikZ/Figure - Example of Arithmetic decoding}
+    \end{example*}
+
+    \subsection{Adaptive arithmetic encoding}
+    \subfile{../sub/3.1 - Adaptive arithmetic encoding}
+\end{document}

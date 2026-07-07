@@ -1,0 +1,83 @@
+\documentclass{subfiles}
+\begin{document}
+    Why is BWT so useful? The main perk of BWT is that its output is locally 
+        homogeneous; that is, it is the concatenation of several substrings
+        with few runs of equal symbols.
+
+    Consider the structure of a BWT-based compressor shown below,
+        \subfile{../../TikZ/Figure - Schema of a BWT based compressor}
+        where \emph{Compressor} refers to a statistical compressor, 
+        such as Huffman or Arithmetic coding using \gls{mtf} and \gls{rle}
+        as prepocessor. Both are briefly described in the following section.
+        
+    In their paper, Ferragina and Manzini suggested that MTF was a needed step,
+        but in \cite{giacarloSciortino2003} Giancarlo and Sciortino proved otherwise.
+
+    A detailed analysis of BWT-based compressor is provided by Manzini in \cite{manzini2001};
+        in what follows we summarize some of his results. 
+
+    Manzini analyzes the compression ratio of BWT-based compressor in terms of 
+        0-order empirical entropy, defined as the quantity 
+        \[
+            \entropy{S}[0] = - \sum_{i = 0}^{k} {\frac{n_{i}}{n} \log \frac{n_{i}}{n}}
+        \]
+        where \(k\) is the number of distinct symbols in \(S\), 
+        and \(n_{i}\) the number of occurencies of the \(i\)-th symbol.
+        By using this definition, which makes no assumption on the probability distribution 
+        of the source, empirical entropy can be used for a worst case analysis.
+        Using empirical entropy Manzini proved that 
+        \[\begin{aligned}
+            \abs{Huff(S)} \le \abs{S}\entropy{S}[0] + \abs{S} \\
+            \abs{Arit(S)} \le \abs{S}\entropy{S}[0] + \mu\abs{S} \\
+        \end{aligned}\]
+        where \(\abs{S}\entropy{S}[0]\) is the size of an optimal compressor 
+        that uses \(\sfrac{n_{1}}{n} \log \frac{n}{n_{i}}\) bits per symbol. 
+        The Arithmetic bound holds if finite-precision is used.
+
+    The empirical entropy can be generalized to any order, and is defined as
+        \[
+            \entropy{S}[k] = \frac{1}{\abs{S}} \sum_{w \in \Sigma^{k}} \abs{w_{s}} \entropy{w_{s}}[0]
+        \]
+        where \(w_{s}\) is the concatenation of the symbols immediately following 
+        \(w\) in \(S\). For instance, if the string is ``mississppi'' and \(k = 3\),
+        we have \(\mathtt{mis}_{S} = s, \mathtt{iss}_{S} = ii, \mathtt{ssi}_{S} = sp,
+        \mathtt{sis}_{S} = s, \mathtt{sip}_{S} = p, \mathtt{ipp}_{S} = i \text{ and } \mathtt{ppi}_{S} = \$\).
+        Computing the \(3\)-order empirical entropy we have
+        \[\begin{aligned}
+                \entropy{mississppi}[3] & = \frac{1}{11} 
+                [
+                    \entropy{\mathtt{mis}_{S}}[0] + 2\entropy{\mathtt{iss}_{S}}[0] + 
+                    2\entropy{\mathtt{ssi}_{S}}[0] + \entropy{\mathtt{sis}_{S}}[0] \\
+                    & + \entropy{\mathtt{sip}_{S}}[0] + \entropy{\mathtt{ipp}_{S}}[0] + 
+                    \entropy{\mathtt{ppi}_{S}}[0]
+                ] \\ 
+                & = \frac{2}{11} \approx 0.18. 
+        \end{aligned}\]
+
+    Essentially, BWT allows us to boost a 0-order compressor,
+        such as Huffman, making it behave like a compressor which uses a memory of length \(k\).
+        
+    Some additional results proved in Manzini's paper are the following:
+        \begin{itemize}
+            \item Let \(bwt_{0}(S)\) be the output of the compressor \(Order_{0}(mtf(bw(S)))\),
+                then it holds 
+                \[
+                    \abs{bwt_{0}(S)} \le 8 \abs{s} \entropy{s}[k] 
+                        + (\mu + \sfrac{2}{25})\abs{S}
+                        + h^{k}(2h \log h + 9)
+                \]
+                where \(h\) is the size of the alphabet.
+
+            \item Let \(btw_{RL}(S)\) be the output of the compressor
+                \(Order_{0}(rle(mtf(bw(S))))\), then it holds 
+                \[
+                    \abs{\bwt_{RL}(S)} \le (5 + 3\mu)\abs{S}H^{*}_{k}(S) + g_{k}
+                \]
+                where \(g_{k}\) is a constant dependent on \(k\) and \(h\), 
+                and \(H^{*}_{k}(S)\) is the \(k\)-th order modified empirical entropy;
+                that is, the empirical entropy whose factor are of length up to \(k\).
+        \end{itemize}
+
+    \subsubsection{MTF and RLE}
+    \subfile{../subsub/5.1.1 - MTF and RLE}
+\end{document}

@@ -1,0 +1,46 @@
+\documentclass{subfiles}
+\begin{document}
+    We now turn our attention to a more interesting question: 
+        fixed a source over some alphabet, how do we design the optimal code for it?
+        The question, apparently hard, has a somewhat obvious answer:
+        take in account the lengths of the codewords. Or better said, 
+        their average.
+
+    Formally speaking, we take in account the \gls{acl} of the code, 
+        defined as the quantity
+        \[
+            \acl = \sum_{i = 1}^{n} p_{i}l_{i}
+        \]
+        such that is minimal. We say that a code \(\C*\) is compact (or optimal) for the source 
+        \(S\) if, among all prefix codes for \(S\), \(\C*\) has the minimal ACL.
+
+    \begin{remark*}
+        Is there a lower bound for the ACL? Yes, and it given by the following result.
+        \begin{lemma*}[Shannon]
+            If \(\C*\) is a UD code for a source \(S\) with probabilities 
+            \(p_{1}, \ldots, p_{n}\), and \(d\) is the size of the code alphabet,
+            then
+            \[
+                \acl \ge \frac{H(S)}{\log d}
+            \]
+        \end{lemma*}
+    \end{remark*}
+
+    In addition to the ACL, two additional quantities are significant when designing a 
+        code: the efficiency \(\eff\) and the redundancy \(\red\). More precisely,
+        we want that the efficiency, defined as 
+        \[
+            \eff = \frac{H(S)}{\acl}
+        \]
+        is maximized; while the redundancy, defined as 
+        \[
+            \red = 1 - \eff = \frac{\acl - H(S)}{\acl}
+        \]
+        is minimized.
+
+    A question still remains: how do we build optimal codes? 
+        Over the years, several attempts to provide a procedure to build optimal codes 
+        were done, but until 1952 none achived the goal. 
+        We discuss this procedure in the next section.
+        \clearpage
+\end{document}

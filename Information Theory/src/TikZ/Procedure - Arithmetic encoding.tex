@@ -1,0 +1,15 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{encode(S, n, Prob)}\label{proc:arithmeticEncoding}
+        $l \leftarrow 0$ \DontPrintSemicolon\;
+        $s \leftarrow 1$ \DontPrintSemicolon\;
+        \For{$i \leftarrow 1$ \KwTo $n$}{
+            $s \leftarrow s * Prob[S[i]]$ \DontPrintSemicolon\;
+            $l \leftarrow l + s * f_{S[i]}$ \DontPrintSemicolon\;
+            \tcc{Assume $f_{S[i]}$ to be the cumulative distribution function}
+            $i \leftarrow i + 1$ \DontPrintSemicolon
+        }
+        \Return{$ x \in [l, l + s]$}
+    \end{procedure}
+\end{document}

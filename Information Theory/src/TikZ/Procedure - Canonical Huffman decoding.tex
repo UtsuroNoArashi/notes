@@ -1,0 +1,13 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}[!htb]
+        \caption{decodeCanonicalHuffman()}\label{proc:decodeCanonical}
+        $v \leftarrow next\textunderscore{}bit()$ \DontPrintSemicolon\;
+        $l \leftarrow 1$ \DontPrintSemicolon\;
+        \While{$v < fc[l]$}{
+            $v \leftarrow 2*v + next\textunderscore{}bit()$ \DontPrintSemicolon\;
+            $l \leftarrow l + 1$
+        }
+        \Return{symb[l, v - fc[l]]}
+    \end{procedure}
+\end{document}

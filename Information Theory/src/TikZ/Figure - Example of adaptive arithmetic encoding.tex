@@ -1,0 +1,105 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure*}[!h]
+        \centering
+        \begin{tikzpicture}
+        [
+            every node/.style={font=\small\ttfamily},
+        ] 
+
+        \foreach \interation/\symb in {1.5/a, 2.5/b, 3.5/c, 4.5/b} {
+            \node at (\interation * 2.25, 3) [label=above:{Read \symb}] {};
+        }
+
+        % Iteration 0: no symbol read yet
+        \draw [ |-, thick ] (2.25, 0) -- ++(0, 1);
+        \draw [ |-|, thick ] (2.25, 1) -- ++(0, 1);
+        \draw [ -|, thick ] (2.25, 2) -- ++(0, 1);
+
+        \node at (2.375, 0.5) [label=left:{a}] {};
+        \node at (2.375, 1.5) [label=left:{b}] {};
+        \node at (2.375, 2.5) [label=left:{c}] {};
+
+        \node (00) at (2.25, 0) [label=right:{0}] {};
+        \node (01) at (2.25, 1) [label=right:{$\frac{1}{3}$}] {};
+        \node at (2.25, 2) [label=right:{$\frac{2}{3}$}] {};
+        \node at (2.25, 3) [label=right:{1}] {};
+
+        \draw [thick, rpIris] (00.east) ++(0.375, 0) -- (4.375, 0);
+        \draw [thick, rpIris] (01.east) ++(0.375, 0) -- ++(0.75, 0) 
+            -- ++(0, 2) -- ++(0.875, 0);
+
+        % Iteration 1: read a 
+        \draw [ |-, thick ] (4.5, 0) -- ++(0, 1.5);
+        \draw [ |-|, thick ] (4.5, 1.5) -- ++(0, 0.75);
+        \draw [ -|, thick ] (4.5, 2.25) -- ++(0, 0.75);
+
+        \node at (4.625, 0.75) [label=left:{a}] {};
+        \node at (4.625, 1.875) [label=left:{b}] {};
+        \node at (4.625, 2.626) [label=left:{c}] {};
+
+        \node at (4.5, 0) [label=right:{0}] {};
+        \node (10) at (4.5, 1.5) [label=right:{$\frac{1}{6}$}] {};
+        \node (11) at (4.5, 2.25) [label=right:{$\frac{1}{4}$}] {};
+        \node at (4.5, 3) [label=right:{$\frac{1}{3}$}] {};
+
+        \draw [thick, rpFoam] (10.east) ++(0.375, 0) -- ++(0.75, 0)
+            -- ++(0, -1.5) -- ++(0.875, 0);
+        \draw [thick, rpFoam] (11.east) ++(0.375, 0) -- ++(0.75, 0)
+            -- ++(0, 0.75) -- ++(0.875, 0);
+        % Iteration 2: read b
+        \draw [ |-, thick ] (6.75, 0) -- ++(0, 1.2);
+        \draw [ |-|, thick ] (6.75, 1.2) -- ++(0, 1.2);
+        \draw [ -|, thick ] (6.75, 2.4) -- ++(0, 0.6);
+
+        \node at (6.875, 0.6) [label=left:{a}] {};
+        \node at (6.875, 1.8) [label=left:{b}] {};
+        \node at (6.875, 2.7) [label=left:{c}] {};
+
+        \node at (6.75, 0) [label=right:{$\frac{1}{6}$}] {};
+        \node at (6.75, 1.2) [label=right:{$\frac{1}{5}$}] {};
+        \node (20) at (6.75, 2.4) [label=right:{$\frac{7}{30}$}] {};
+        \node (21) at (6.75, 3) [label=right:{$\frac{1}{4}$}] {};
+
+        \draw [thick, rpPine] (20.east) ++(0.5, 0) -- ++(0.625, 0)
+            -- ++(0, -2.4) -- ++(0.875, 0);
+        \draw [thick, rpPine] (21.east) ++(0.375, 0) -- (8.875, 3);
+
+        % Iteration 3: read c
+        \draw [ |-, thick ] (9, 0) -- ++(0, 1);
+        \draw [ |-|, thick ] (9, 1) -- ++(0, 1);
+        \draw [ -|, thick ] (9, 2) -- ++(0, 1);
+
+        \node at (9.125, 0.5) [label=left:{a}] {};
+        \node at (9.125, 1.5) [label=left:{b}] {};
+        \node at (9.125, 2.5) [label=left:{c}] {};
+
+        \node at (9, 0) [label=right:{$\frac{7}{30}$}] {};
+        \node (30) at (9, 1) [label=right:{$\frac{43}{180}$}] {};
+        \node (31) at (9, 2) [label=right:{$\frac{11}{45}$}] {};
+        \node at (9, 3) [label=right:{$\frac{1}{4}$}] {};
+
+        \draw [thick, rpGold] (30.east) ++(0.625, 0) -- ++(0.5, 0)
+            -- ++(0, -1) -- ++(0.875, 0);
+        \draw [thick, rpGold] (31.east) ++(0.5, 0) -- ++(0.625, 0)
+            -- ++(0, 1) -- ++(0.875, 0);
+        % Iteration 4: read b
+        \draw [ |-, thick ] (11.25, 0) -- ++(0, 6/7);
+        \draw [ |-|, thick ] (11.25, 6/7) -- ++(0, 9/7);
+        \draw [ -|, thick ] (11.25, 15/7) -- ++(0, 6/7);
+
+
+        \node at (11.375, 3/7) [label=left:{a}] {};
+        \node at (11.375, 1.5) [label=left:{b}] {};
+        \node at (11.375, 18/7) [label=left:{c}] {};
+
+        \node (40) at (11.25, 0) [label=right:{$\frac{43}{180}$}] {};
+        \node at (11.25, 6/7) [label=right:{$\frac{101}{420}$}] {};
+        \node at (11.25, 15/7) [label=right:{$\frac{17}{70}$}] {};
+        \node at (11.25, 3) [label=right:{$\frac{11}{45}$}] {};
+
+        \draw [thick, rpLove, |-| ] (40.east) ++(0.75, 0) -- ++(0, 3);
+        \node at (12, 1.5) [label=right:{$\ni x$}] {}; 
+        \end{tikzpicture}
+    \end{figure*}
+\end{document}

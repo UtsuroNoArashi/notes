@@ -1,0 +1,78 @@
+\documentclass{subfiles}
+\begin{document}\label{sec:burrowsWheeler}
+    Introduced in \cite{burrowsWheeler1994}, 
+        \Gls{bwt} is a technique that allows a better compression.
+        The transformation is simple, as described in the following.
+        Let \(w\) be the text we want to transmit; 
+        as first step we append a end of string symbol to it, 
+        let it be \(\$\), we then compute all cyclic rotations of \(w\),
+        and sort all cyclic rotations lexicographically.
+
+    For the sake of simplicity, assume the cyclic rotations to be displayed in a matrix,
+        see for instance \Cref{tab:exampleBWT}. 
+        Then, output of the BWT is the last column of said matrix and the row index
+        \(I\) of the original text.
+
+    \begin{example*}
+        Let \(w = mississippi\). Computing all \(w\)'s cyclic rotations we get:
+        \subfile{../../TikZ/Figure - Example of the BWT}
+
+    \noindent Sorting them lexicographically, and displaying them in a matrix we get the following.
+        \subfile{../../TikZ/Table - Example of the BWT}
+        
+    \noindent Therefore, the output is \(\bwt = <ipssm\$ pissii, 6>\).            
+    \end{example*}
+    
+    The BWT satisfies some interesting properties, 
+        that are fundamental to compute the inverse transformation.
+        These, listed below, allow us to compute two distinct mappings, namely,
+        the FL and the LF mapping.
+        \begin{enumerate}
+            \item For every \(i \ne I, L[i]\) is followed by \(F[i]\).
+            \item The first character of \(w\) is \(F[I]\).
+            \item \label{bwt:3} The \(i\)-th occurence of character \(x\) in \(L\)
+                corresponds to the \(i\)-th occurence of \(x\) in \(F\).
+        \end{enumerate}
+
+    Assume \(<L, I>\) to be the output of the BWT of some string. 
+        From it, computing \(F\) is trivial -- 
+        simply sort lexicographically the symbols in \(L\).
+        By property \ref{bwt:3} we can define a mapping from \(F\) to \(L\),
+        obtaining this way a permutation, call it \(\tau\).
+        Then, it's easily seen that the \(i\)-th symbol of \(w\) is given by \(F[\tau^{i}[I]]\).
+        The \(LF\)-mapping is obtained similarly, but the string obtained is in reverse.
+
+    \begin{example*}
+        Consider \(<h\$ lpae, 1>\).
+        By sorting \(L\), we get: \(F = [\$, a, e, h, l, p]\), from which
+        \[
+            \tau = \begin{pmatrix}
+                0 & 1 & 2 & 3 & 4 & 5 \\ 
+                1 & 4 & 5 & 0 & 2 & 3 \\ 
+            \end{pmatrix}.
+        \]
+        Retriveing \(w\), we have: \(w[0] = F[\tau^{0}[I]] = F[I] = a, 
+        w[1] = F[\tau[I]] = F[4] = l, \dots, w[5] = F[\tau^{5}[I]] = F[0] = \$\).
+        In conclusion, \(w = aleph\$\) from which we remove the end of string symbol \(\$\).
+    \end{example*}
+
+    \begin{remark*}
+        It is easily seen that BWT's efficiency strictly depends on the sorting of 
+            the cyclic rotations. It is well known that, by using a standard sorting 
+            algorithms the best we can achive is a \(\bigO{n \log n}\) time complexity,
+            which is obviously too much for a pre-processing step.
+
+        It can be proved that if we focus on sorting the suffixes of the string,
+            we have effectively sorted all cyclic rotations. How should we proceed then?
+            In many applications we achive this by computing the \gls{sa}; 
+            that is, a sorted array of the positions of the suffixes.
+            In \Cref{sec:DC3} we show how to efficiently compute the SA,
+            while in the next section we focus on analyzing some theoretical aspects of BWT.
+    \end{remark*}
+
+    \subsection{Analysis of the BWT}
+    \subfile{../sub/5.1 - Analysis of the BWT}
+
+    \subsection[The DC3 algorithm]{Efficient computation of the SA}
+    \subfile{../sub/5.2 - DC3 algorithm}
+\end{document}

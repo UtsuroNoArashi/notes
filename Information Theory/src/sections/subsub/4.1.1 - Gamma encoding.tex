@@ -1,0 +1,32 @@
+\documentclass{subfiles}
+\begin{document}
+    Let \(x\) be an integer and let \(B(x)\) be it's binary expansion,
+        i.e. it's binary representaion. Then, the gamma encoding of \(x\)
+        consist of two parts: the unary representation of \(\abs{B(x)}\) and 
+        the binary representation of \(x\) with the most significant digit removed.
+        That is 
+        \[
+            \gamma(x) = U(\abs{B(x)}) \tilde{B}(x)
+        \]
+        where \(\tilde{B}(x)\) is \(B(x)\) with the most significant digit removed.
+
+    \begin{example*}
+        Consider the integer 29. Its binary representation \(B(29) = 11101\).
+            The unary encoding of \(\abs{B(29)}\) is \(U(\abs{B(29)}) = U(5) = 00001\).
+            Therefore, the gamma encoding of \(29\) is
+            \[
+                \gamma(29) = \underbrace{00001}_{U(\abs{B(29)})}
+                    \underbrace{1101}_{\tilde{B}(29)}
+            \]
+    \end{example*}
+
+    Decoding is trivial: count the number of zeros up to the first 1,
+        say this are \(k\), fetch the following \(k + 1\) bits and interpret the 
+        sequence as the integer \(x\). 
+
+    It can be proved that gamma encoding is optimal when the distibution is 
+        \[
+            p(x) = \frac{1}{x^{2}}.
+        \]
+        As easily seen, the inefficiency is given by the unary encoding of \(\abs{B(x)}\).
+\end{document}

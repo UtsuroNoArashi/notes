@@ -1,0 +1,64 @@
+\documentclass{subfiles}
+\begin{document}\label{sec:integersEncoding}
+    Many applications use integers to represent data. For instance,
+        when we transmit an image, what we actualy transmit are triplets of 
+        integers in the range [0, 255]. Additionaly, 
+        many theoretical results we shall see in the following,
+        make use of integers (see \Cref{sec:burrowsWheeler} and \Cref{sec:lempelZiv}).
+
+    Therefore the questions: can we define a optimal code for integers?
+        Can we use the codes seen so far? Both questions have an affirmative answer,
+        but before analyzing it, we formalize the problem.
+        
+    Let \(S = s_{1}s_{2}\ldots\) be a sequence of (positive) integers.
+        Is there a prefix code such that the average codeword length is 
+        \(\bigO{\log s_{i}}\), for any integer \(s_{i}\).
+
+    In the subsequent sections we describe three of such code,
+        while we use the remainder of the present section to make some remarks.
+
+    \begin{remark*}
+        We can relax the constrain on positive integers. In fact, 
+            we can simply proceed to define a bijective functions 
+            that maps each integer to another. 
+            One of such map is the following:
+            \[
+                f(n) = \begin{cases}
+                    2n, \text{if } n > 0 \\
+                    -2n + 1, \text{otherwise.} 
+                \end{cases}
+            \]
+    \end{remark*}
+
+    \begin{remark*}
+        Why don't we use the binary representation? 
+            It easily seen that this kind of representation is not prefix free.
+            For instance, if we consider the binary representation of 2 and 4
+            we have, respectively, 10 and 100 which are prefix one of another.
+    \end{remark*}
+
+    A simple solution is the unary encoding. 
+        Essentially, any positive integer \(n\) is encoded as a sequence of \(n - 1\) zeros 
+        followed by a one. That is 
+        \[
+            U(n) = \underbrace{00\ldots0}_{n - 1 \text{ times}}1.
+        \]
+
+    The code is trivially prefix-free, as any two different integers 
+        differ by at least one digit. At the same time its use isn't feasable,
+        as the number of bits needed to encode the integer increases linearly.
+
+    Before we describe any particular family of codes to encode integers, 
+        let us consider Huffman encoding. Can we use it?
+        It's known by now that Huffman encoding performs well when the probabilities 
+        are known a priori. Hence, if the distribution of integers is known, 
+        Huffman encoding is still worth considering. On the other hand,
+        if the distribution is unknown, or it may vary, then Huffman works poorly
+        and special codes should be considered.
+
+    \subsection{Elias codes}
+    \subfile{../sub/4.1 - Elias codes}
+
+    \subsection{Fibonacci codes}
+    \subfile{../sub/4.2 - Fibonacci codes}
+\end{document}

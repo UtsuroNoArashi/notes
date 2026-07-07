@@ -1,0 +1,41 @@
+% Project preamble
+\title{Notes on Information Theory}
+\author{Riccardo Lo Iacono}
+
+%% List of BibTeX files to include 
+\addbibresource{../extra/BibTeX/papers.bib}
+\addbibresource{../extra/BibTeX/tecnical reports.bib}
+\addbibresource{../extra/BibTeX/proceedings.bib}
+
+%% List of glossaries goes here.
+\makeglossaries 
+\newacronym{ud}{UD}{Uniquely Decodable}
+\newacronym{sa}{SA}{Suffix Array}
+\newacronym{st}{ST}{Suffix Tree}
+\newacronym{acl}{ACL}{Average Codeword Length}
+\newacronym{bwt}{BWT}{Burrows-Wheeler Transfrom}
+\newacronym{mtf}{MTF}{Move-To-Front}
+\newacronym{rle}{RLE}{Run-Length-Encoding}
+
+
+%% List of references alias 
+\Crefname{theorem}{Theorem}{Theorems}
+\Crefname{lemma}{Lemma}{Lemmas}
+
+%% List of document specific commands
+\NewDocumentCommand{\acl}{O{S} O{\C*}}{
+    L_{#1}(#2)
+}
+
+\NewDocumentCommand{\eff}{O{S} O{\C*}}{
+    \vartheta_{#1}(#2)
+}
+
+\NewDocumentCommand{\red}{O{S} O{\C*}}{
+    \rho_{#1}(#2)
+}
+
+\DeclareMathOperator{\@bwt}{bwt}
+\NewDocumentCommand{\bwt}{O{w}}{
+    \@bwt \left\lparen #1 \right\rparen
+}

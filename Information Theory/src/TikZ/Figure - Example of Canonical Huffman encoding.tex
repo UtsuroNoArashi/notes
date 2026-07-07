@@ -1,0 +1,26 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure*}[!h]
+        \centering 
+        \begin{tikzpicture}
+            \graph[
+                tree layout, nodes={draw, circle, minimum size = 0.125},
+                edge quotes = {font=\ttfamily\scriptsize, anchor=center, fill=rpBase}
+            ] {
+                "" [fill=rpLove] -- {
+                    "" [fill=rpRose, >"0"] -- {
+                        "" [>"0", "g" below],
+                        "" [>"1", "b" below],
+                        "" [>"2", "c" below]
+                    },
+                    "" [fill=rpGold, >"1"] -- {
+                        "" [>"0", "e" below],
+                        "" [>"1", "f" below],
+                        "" [>"2", "d" below]
+                    },
+                    "" [>"2", "a" below]
+                }
+            };
+        \end{tikzpicture}
+    \end{figure*}
+\end{document}

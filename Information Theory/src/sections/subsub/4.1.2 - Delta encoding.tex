@@ -1,0 +1,54 @@
+\documentclass{subfiles}
+\begin{document}
+    Defined starting from gamma encoding,
+        delta encoding allows to define shorter codewords\footnotemark.
+        By using the same notation as before, if \(x\) is an integer 
+        its gamma encoding consists of two parts: the gamma encoding of 
+        \(\abs{B(x)}\) and \(\tilde{B}(x)\). That is
+        \[
+            \delta(x) = \gamma(\abs{B(x)}) \tilde{B}(x).
+        \]
+
+    \footnotetext{It should be pointed out that this is true for values of \(n \ge 32\).}
+
+    \begin{example*}
+        Consider again 29. Its binary representaion is \(B(29) = 11101\).
+            The gamma encoding of \(\abs{B(29)}\) is 
+            \[\begin{aligned}
+                \gamma(29) & = U(\abs{B(\abs{B(29)})}) \tilde{B}(\abs{B(29)}) \\ 
+                    & = U(\abs{B(5)}) \tilde{B}(5) \\ 
+                    & = 001 01.
+            \end{aligned}\]
+            
+            We can conclude that the delta encoding of \(29\) is 
+            \[
+                \delta(29) = \underbrace{
+                        \overbrace{001}^{U(\abs{B(5)})}
+                        \overbrace{01}^{\tilde{B}(5)}
+                    }_{\gamma({\abs{B(29)}})}
+                    \underbrace{1101}_{\tilde{B}(29)}
+            \]
+    \end{example*}
+
+    Decoding is simple: count the number of zeros up to the first 1,
+        say these are \(k\), fetch the following \(k + 1\) and interpret the sequence 
+        as the integer \(x\); fetch the following \(x - 1\) bits, 
+        prepend a 1 to the sequence and interpret it as the integer \(n\).
+
+    It can be proved that delta encoding is optimal when the distribution is 
+    \[
+        p(x) = \frac{1}{x \log^{2} x}.
+    \]
+
+    \begin{remark*}
+        What can we say about the sensitivity of gamma and delta encoding?
+            That is, how well do the two encoding do when errors occur in transmission?
+            It's easily seen that, even if a single gets flipped, the whole sequence 
+            gets decoded incorrectly.
+        
+        The main issue is that neither of the two encoding produces self-syncronizing codewords.
+            In the next section we describe a code that instead does produce self-syncronizing
+            codewords
+
+    \end{remark*}
+\end{document}

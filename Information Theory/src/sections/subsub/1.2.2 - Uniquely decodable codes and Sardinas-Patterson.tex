@@ -1,0 +1,61 @@
+\documentclass{subfiles}
+\begin{document}
+    Non-singular codes are not enough. 
+        More often than not, it happens that the sequence of bit in analysis may be factored
+        as concatenation of distinct codewords, one again making the decoding process tedious. 
+
+    Briefly speaking, what we are looking for are codes for which any sequence of codewords
+        corresponds to at most one sequence of source symbol.
+        We call such code \gls{ud} codes.
+        
+    Hence the questions: how do we construct UD codes?
+        How do we determine if a given code is UD? 
+        In the present section we answer to the latter question;
+        the answer to the first question will be discussed later.
+
+    In 1953, Sardinas and Patterson proved a result that defines an implicit algorithm 
+        to determine if a code is UD. The result, stated below, is based on a simple observation:
+        if we try to construct two factorizations, each word in the first factorizations
+        is either a sub-word in the other factorization or has a prefix that is a suffix of 
+        the words in the other factorization.
+
+    \begin{theorem*}[Sardinas-Patterson]
+        Let \(\C*\) be a code over the alphabet \(\Sigma\).
+        Define the sets \(S_{0}, S_{1}, \ldots\) as follow:
+        \[\begin{aligned}
+            S_{0} & = \C* \\ 
+            S_{i} & = \set{w \in \Sigma^{*}}[\exists \alpha \in S_{0},
+                \exists \beta \in S_{i - 1} : \alpha = \beta w \lor \beta = \alpha w].
+        \end{aligned}\]
+        Then, necessary and sufficient condition for \(\C*\) to be UD is that,
+        for all \(n > 0\), \(S_{0} \cap S_{n} = \varnothing\).
+    \end{theorem*}
+
+    Algorithmically speaking, since the number of possible sets it's finite,
+        the process will eventually stop. 
+        The condition in the above theorem, defines three possible halt conditions,
+        namely: 
+        \begin{enumerate}
+            \item \(\exists i \ge 0 \text{ s.t.} S_{0} \cap S_{i} \ne \varnothing\),
+                meaning the code is not UD;
+            \item \(\exists i \ge 0, \text{ s.t. } S_{i} = \varnothing\),
+                making the code UD; and 
+            \item \(\exists i, j \ge 0 \text{ s.t. } S_{i} = S_{j}\),
+                meaning the code is UD.
+        \end{enumerate}
+
+    In the example following we use colours to show the relatioship between \(\alpha, \beta\)
+    and \(w\). Additionaly, we align each \(w\) to the row of the corresponfing \(\alpha\).
+    \clearpage 
+
+    \begin{example*}
+        Consider the code \(\C* = \set{a, c, ad, abb, bad, deb, bbcde}\), is it UD?
+            Let's apply the Sardinas-Patterson algorithm and check. 
+            What we get is the following table.
+
+            \subfile{../../TikZ/Table - Example of the Sardinas-Patterson algorithm}
+
+            \noindent Since \(S_{0} \cap S_{5} = \set{ab} \ne \varnothing\),
+            we can conclude that \(\C*\) is not UD.
+    \end{example*}
+\end{document}

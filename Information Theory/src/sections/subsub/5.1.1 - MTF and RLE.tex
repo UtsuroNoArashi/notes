@@ -1,0 +1,44 @@
+\documentclass{subfiles}
+\begin{document}
+    Our description of move-to-front and run-length-encoding will be the following:
+        we describe MTF in details, presenting the core idea and an example;
+        for RLE we simply give the general idea.
+
+    Introduced in \cite{bentleySTW86}, MTF is a simple encoding based on frequency.
+        Formally, let \(S\) be a text and let \(A\) be the alphabet on which its defined.
+        It follows, that \(S\)'s characters satisfy some lexicographic order.
+        Using this fact, MTF encodes the \(i\)-th symbol in \(S\) by the 
+        number of distinct symbols preceeding it in \(A\), 
+        then moving said character to the front of \(A\).
+        The process is repeated until \(S\) is scanned completely.
+
+    The core idea is that, if \(S\) is localy homogeneous, as in the case of BWT,
+        then the output of the encoding will be a sequence of small integers,
+        which can be encoded in turns by some universal encoder of integers.
+
+    Decoding is easy as well; since the alphabet is known by both parties,
+        we proceed as done in encoding. Precisely, we decode the symbol as 
+        the \((i + 1)\)-th symbol in \(A\) and move that character to the front.
+
+    Perfomance-wise it can be proved that MTF behaves slightly worse then Huffman 
+        in the worst case, and a lot better in the best one.
+
+    \begin{example*}
+        Consider the string \(w = smmihtt\textdollar ecaa = bwt(mathematics\textdollar)\). 
+            The alphabet is \(A = \set{\textdollar, a, c, e, h, i, m, s, t}\) and the lexicographic 
+            order is the usual one \((\textdollar \prec a \prec \cdots \prec t)\). 
+
+        We encode \(s\) as \(7\), and move it to the fron of \(A\);
+            \(m\) is then encoded as \(7\), and so on. 
+            Once \(w\) has be read completely, the output of MTF is the sequence
+            \((7, 7, 0, 7, 7, 8, 0, 5, 8, 8, 8, 0)\). 
+            Note that \(w\) has little-to-no run, thus the ``big'' integers are expected.
+    \end{example*}
+
+    Run-length-encoding is somewhat simple, and several implementations can be found
+        in the literature. The idea is that, if a character \(x\) appears \(n\)
+        consecutive times, then it can be encoded as \(nx\).
+        How to encode \(nx\) depends on the implementations,
+        some use pairs eg. \((x, n)\); other encode \(n\) replacing the 1s in 
+        its binary representation with \(x\). 
+\end{document}

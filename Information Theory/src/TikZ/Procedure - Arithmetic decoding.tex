@@ -1,0 +1,17 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}[!h]
+        \caption{decode(Stream, n, Prob)}\label{proc:arithmeticDecoding}
+        $l \leftarrow 0$ \DontPrintSemicolon\;
+        $s \leftarrow 1$ \DontPrintSemicolon\;
+        $S \leftarrow$ ``'' \DontPrintSemicolon\;
+        \For{$i \leftarrow 1$ \KwTo $n$}{
+            $S \leftarrow S + \sigma$ 
+            \tcc{Assume $+$ to be the concatenation operation and $\sigma$ the read symbol.}
+            $s \leftarrow s * Prob[S[i]]$ \DontPrintSemicolon\;
+            $l \leftarrow l + s * f_{S[i]}$ \DontPrintSemicolon\;
+            \tcc{Assume $f_{S[i]}$ to be the probability cumulative function}
+        }
+        \Return{S}
+    \end{procedure}
+\end{document}

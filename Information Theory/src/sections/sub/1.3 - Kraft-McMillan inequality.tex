@@ -1,0 +1,45 @@
+\documentclass{subfiles}
+\begin{document}
+    We now consider an interesting result about UD codes: the Kraft-McMillan inequality.
+        Formally, the Kraft-McMillan theorem stastes that a code \(\C*\) over an alphabet 
+        of size \(d\), with of codewords lengths \(l_{1}, \ldots, l_{n}\) is UD, if and only if 
+        \[
+            \sum_{i = 1}^{n}d^{-l_{i}} \le 1.
+        \]
+
+    The inequality provides therefore a necessary and sufficient condition for a
+        code to be UD. 
+
+    \begin{proof*}
+        We prove the result by construction; that is, 
+            we show that if a set of lengths satisfies the inequality,
+            then we can build a tree whose paths from the root to the leaves 
+            define codewords of a prefix-free code.
+
+        \begin{description}
+            \item [\(\impliedby\)] Easely seen with any UD code.
+            \item [\(\implies\)] Let \(l_{1}, \ldots, l_{n}\) be such that 
+                \[
+                    \sum_{i = 1}^{n} d^{-l_{i}} \le 1.
+                \]
+                Denote by \(n_{j}\) the number of codewords of length \(j\).
+                Let \(L\) be the maximum length.
+                Then 
+                \[
+                    \sum_{j = 1}^{L} n_{j} = n
+                \]
+                since there are \(n\) codewords. Hence, we have 
+                \[
+                    \sum_{i = 1}^{n} d^{-l_{i}} = \sum_{j = 1}^{L} n_{j}d^{-j} \le 1.
+                \]
+                By doing so, we build a \(d\)-ary tree which has \(n_{1}\) 
+                leaves at depth 1, \(n_{2}\) leaves at depth 2, etc.
+                It's easely seen that this produces a prefix-free code.\qed
+        \end{description}
+    \end{proof*}
+
+    \begin{remark*}
+        If the set of lengths is such that the sum is strictly less then one,
+            then some paths in the tree will correspond to no codeword.
+    \end{remark*}
+\end{document}

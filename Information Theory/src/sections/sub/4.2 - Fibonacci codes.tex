@@ -1,0 +1,59 @@
+\documentclass{subfiles}
+\begin{document}
+    Introduced in 1989 by R. Capocelli, Fibonacci encoding produces self-syncronizing codewords.
+        The encoding is based on the Zeckendorf theorem stated below,
+        which allows us to represent each positive integer as the sum of Fibonacci numbers.
+        Recall that Fibonacci numbers are defined by the recurrence 
+        \[
+            F_{n} = \begin{cases}
+                0, \text{ if } n = 0 \\ 
+                1, \text{ if } n = 1 \\ 
+                F_{n - 1} + F_{n - 2}, \forall n \ge 2.
+            \end{cases}
+        \]
+
+    \begin{theorem*}[Zeckendorf's]
+        Let \(n\) be an integer. 
+            Then, \(n\) is either a Fibonacci number or 
+            there exist distinct non-consecutive Fibonacci numbers
+            \(F_{i_{1}}, F_{i_{2}, \ldots}\) such that
+            \[
+                n = F_{i_{1}} + F_{i_{2}} + \cdots 
+            \]
+            with \(F_{i_{j}} \ge 1\).
+    \end{theorem*}
+    Zeckendorf's representation has the property that no two consecutive bits 
+        are set to 1.
+
+    Let \(n\) be an integer. To encode it using Fibonacci encoding:
+        find the greast Fibonacci number lower then or equal to \(n\),
+        say it's \(F_{i_{j}}\), and compute the reminder \(r = n - F_{i_{j}}\).
+        Starting from the left, set the \(i_{j}\)-th bit to 1.
+        Keep computing the reminder replacing at each step \(r\) to \(n\).
+        Append a 1 to the sequence.
+
+    Appending a 1 to the representation, allows us to have self-syncronizing codes.
+        If errors a occur in trasmission, the affected codeword is discarded 
+        without affecting the rest of the bitstream. 
+
+    \begin{example*}
+        Consider the integer 177. To begin with compute all Fibonacci numbers 
+            lower than or equal to 177, these are: \(F_{1} = 1, F_{2} = 2, F_{3} = 3,
+            F_{4} = 5, F_{5} = 8, F_{6} = 13, F_{7} = 21, F_{8} = 34, F_{9} = 55,
+            F_{10} = 89, F_{11} = 144\). Take \(F_{11}\) and compute \(r = 177 - 144 = 33\),
+            and set the 11-th bit from the left to 1. 
+            We have for the moment \(Fib(177) = 00000000001\).
+            By computing \(r\) once more we have \(r = 33 - 21 = 12\);
+            since the \(7\)-th Fibonacci number was used we update the encoding by setting the 
+            \(7\)-th bit to one. Repeating the process we get that \(Fib(177) = 101010100011\).
+    \end{example*}
+
+    Decoding is trivial: locate the ``11'' in the codeword, and remove the extra bit.
+        Replace each 1 within the codeword with the corresponding Fibonacci number,
+        and compute the integer \(x\) as the sum of these values.
+
+    Fibonacci encoding is proved optimal for 
+    \[
+        p(x) = \frac{1}{x^{1.44}}.
+    \]
+\end{document}

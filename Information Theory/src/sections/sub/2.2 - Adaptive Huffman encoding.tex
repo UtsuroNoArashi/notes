@@ -1,0 +1,33 @@
+\documentclass{subfiles}
+\begin{document}
+    In the previous section we discussed Canonical Huffman encoding, 
+        which solves the issue of transmitting the tree, 
+        but not that of scanning the text twice.
+        In this section we shall present a variant of Huffman encoding that 
+        solves this issue.
+
+    Proposed independently by Fallar in 1973 and Gallager in 1978,
+        later improved by Knut, the Adaptive Huffman encoding
+        solves the issue of repeated scans of the text own of the classic approach.
+        The core idea is simple: build a optimal Huffman tree for the text 
+        process thus far, and reorganize the tree when necessary.
+
+    More in details, we can summarize the procedure as follow:
+    \begin{enumerate}
+        \item Let \(T\) be an empty tree, or let it contain a special symbol 
+            NYT.
+        \item While scanning the text, for each symbol:
+            \begin{itemize}
+                \item If it has already occurred, use the available codeword to encode it;
+                \item If not, encode the NYT symbol, then add the symbol as a new leaf and encode it.
+            \end{itemize}
+        \item After encoding a symbol, update \(T\) as follow:
+                \begin{itemize}
+                    \item Increment the frequency of the symbol and all its ancestors;
+                    \item Reorganize the tree to maintain the Huffman properties.
+                \end{itemize}
+    \end{enumerate}
+
+    It can be proved that, in general,
+        the adaptive approach and the classic one have the same performances.
+\end{document}

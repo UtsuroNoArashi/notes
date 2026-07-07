@@ -1,0 +1,32 @@
+\documentclass{subfiles}
+\begin{document}
+    As for Huffman encoding, the arithmetic encoding procedure just discussed
+        has an issue: the probabilities needs to be known before the encoding begins.
+        A question then arises: can we do better as for the adaptive Huffman encoding?
+        That is, can we make arithmetic encoding adaptive? 
+        In the present section we discuss how we can achieve adaptability.
+
+    The idea is the same as that of adaptive Huffman, but instead of 
+        updating the tree, we update the known probabilities.
+        Algorithmically speaking, it begins by assuming that all symbol have the same probability;
+        that is, the \(n\) subintervals have the same width.
+        As for the static case, once a symbol is read it selects the corresponding subinterval,
+        and increases that symbol probability. The selected 
+        interval is then divided in \(n\) subintervals with width proportional to the probabilities.
+
+    \begin{example*}
+        Let \(S = abcb\) be the text to encode. 
+            Before any character is read, the probabilities are: \(p_{a} = p_{b}
+                = p_{c} = \sfrac{1}{3}\).
+        Once the first character (\(a\)) is read, we select the range \([0, \sfrac{1}{3}]\)
+        and update the probabilities as \(p_{a} = \sfrac{1}{2}, p_{b} = p_{c} = \sfrac{1}{4}\).
+        We repeat this process until the end of the text, 
+        encoding \(S\) within the range \([\sfrac{43}{180}, \sfrac{11}{45}]\).
+        \subfile{../../TikZ/Figure - Example of adaptive arithmetic encoding.tex}        
+    \end{example*}
+
+    The decoding step is symmetrical: instead of updating the probabilities once a 
+        symbol is read, these are updated each time a new one is decoded.
+        Apart from this caveat, both the encoding and decoding procedures 
+        are equal to \autoref{proc:arithmeticEncoding} and \autoref{proc:arithmeticDecoding}.    
+\end{document}

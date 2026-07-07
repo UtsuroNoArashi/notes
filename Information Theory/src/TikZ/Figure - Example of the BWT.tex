@@ -1,0 +1,30 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure}[!h]
+        \centering
+        \begin{tikzpicture}[
+                scale=0.8, 
+                every label/.style = {font=\ttfamily\scriptsize}
+            ]
+
+            \directlua{
+                local rotations = {}
+
+                local function cyclicRotation(input, len)
+                    input = string.gsub(input, "\\textdollar", "0")
+                    for i = 0, len - 1 do
+                        local rotation = string.sub(input, i + 1, len) .. string.sub(input, 1, i)
+                        rotation = string.gsub(rotation, "0", "\\textdollar ")
+                        table.insert(rotations, rotation)
+                    end
+                end
+
+                cyclicRotation("mississippi\\textdollar", 12)
+
+                for row, value in ipairs(rotations) do
+                    tex.print("\\node at ( 0, " .. row / 2 .. " ) {" .. value .. "};")
+                end
+            }
+        \end{tikzpicture}
+    \end{figure}
+\end{document}

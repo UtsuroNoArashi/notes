@@ -1,0 +1,60 @@
+\documentclass{subfiles}
+\begin{document}
+    Above we've used the term information assuming its meaning as given; 
+        it should be clear that the notion of information in the spoken language
+        has little to do with the CS counterpart. 
+
+    Formally, the notion of information is that of a measure of the
+        reduction of the uncertainty of the outcomes of an event. 
+        That is, a measure of how much knowledge is gained observing the event. 
+        Therefore, it makes sense that the information carried by an event is
+        inversely proportional to its probability.
+
+    Historically, the first person attempting to define information was R.V.L. Hartley;
+        see \cite{hartley1928} for more details. But the major contribution is due to 
+        Claude Shannon, who in \cite{shannon1948}, building on Hartley's ideas,
+        provides a rigorous definition of information and a way to compute it.
+
+    In his paper, Shannon shows that any communication system can be reduced to 
+        five parts: a \emph{sender}, a \emph{transmitter}, a \emph{communication channel}, a \emph{receiver} and a \emph{destination}. 
+        A schematic representation of such system is shown in \Cref{fig:shannonSystem}.
+
+    With his paper, Shannon introduces introduces two important hypotesis:
+        \begin{itemize}
+            \item Transmitting a symbol requires a non-zero amount of time;
+            \item The communication system is subject to noise.
+        \end{itemize}
+
+        \subfile{../../TikZ/Figure 1 - Shannon communication system}
+
+    \begin{remark*}
+        In his paper Shannon actually develops two theories: 
+            one with noise and one without. We focus on the latter.
+    \end{remark*}
+
+    The question now is: what properties should a measure of information satisfy?
+        According to Shannon, such a function should have a dependence on probability,
+        should be monotonic, continous and additive for indenpendent events.
+
+    More often than not, we are interestend in computing the information a source;
+        that is, an entity over some alphabet \(\Sigma\),
+        that at any given time produces a symbol \(\sigma \in \Sigma\)
+        with probability \(\Prob{\sigma}\). 
+        For instance, a Markov chain is an example of source of information.
+        We shall say that there exist two types of sources: with memory and memoryless.
+        In what follows, we consider memoryless sources.
+
+    But how do we actually measure information? According to Shannon, 
+        the only valid measure is 
+        \begin{equation}\label{eq:shannonEntropy}
+            H(S) = K \sum_{i = 1}^{n} {p_{i} \log_{b} p_{i}}
+        \end{equation}
+        where \(n\) is the total number of symbols produced by \(S, p_{i}\)
+        the probability associated with the \(i\)-th symbol produced, and \(K\) a 
+        positive constant usually set to 1.
+        Unless stated otherwise, the base \(b\) of the logarithm is always 2.
+        We usually refer to \Cref{eq:shannonEntropy} as \emph{entropy of a source} \(S\).
+    
+    Although we could prove that \Cref{eq:shannonEntropy} is the only valid measure,
+        it is beyond our scope; the interested reader is referred to \cite{shannon1948}[Appendix 2].
+\end{document}

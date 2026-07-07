@@ -1,0 +1,27 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure}[!ht]
+        \centering
+            \begin{tikzpicture}
+            [
+                box/.style={draw, rectangle, minimum size=1cm},
+                smallbox/.style={draw, rectangle, minimum size=0.5cm},
+                every label/.style={font=\scriptsize}
+            ]
+
+            \node (Is) [box, "Sender"] {};
+            \node (En) [box, right=of Is, "Transmitter"] {};
+            \node (Ch) [smallbox, right=1.5cm of En, "Channel"] {};
+            \node (No) [box, below=1cm of Ch, "Noise" below] {};
+            \node (De) [box, right=1.5cm of Ch, "Receiver"] {};
+            \node (Id) [box, right=of De, "Destination"] {};
+
+
+            \foreach \source/\target in {Is/En, En/Ch, No/Ch, Ch/De, De/Id} {
+                \draw [-Latex] (\source) -- (\target);
+            }
+        \end{tikzpicture}
+        \caption{Schematic representation of Shannon's communication system.}
+        \label{fig:shannonSystem}
+    \end{figure}
+\end{document}

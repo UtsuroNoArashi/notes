@@ -1,0 +1,40 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure}[!ht]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \graph[tree layout, nodes={draw, circle, minimum size = 0.125, fill=rpText}]{
+                    "" -- { 
+                        "" -- {
+                            "" -- {"" ["0.1" below], "" ["0.1" below] },
+                            "" -- {"" ["0.1" below], "" ["0.1" below] }
+                        },
+                        "" -- { "" ["0.3" below],  "" ["0.3" below] }
+                    }
+                };
+
+            \end{tikzpicture}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \graph[tree layout, nodes={draw, circle, minimum size = 0.125, fill=rpText}]{
+                    "" -- { 
+                        "" -- {
+                            "" -- {"" ["0.1" below], "" ["0.1" below] },
+                            "" ["0.3" below]
+                        },
+                        "" -- {
+                            "" -- {"" ["0.1" below], "" ["0.1" below] },
+                            "" ["0.3" below]
+                        }
+                    }
+                };
+            \end{tikzpicture}
+        \end{subfigure}
+        \caption{Comparison of Huffman tree and an equivalent optimal tree.}
+        \label{fig:nonHuffman}
+    \end{figure}
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass{subfiles}
+\begin{document}\label{sec:huffmanCodes}
+    The first method to build optimal codes was discovered by D. A. Huffman,
+        as solution to a problem posed by his lecturer Robert Fano\footnotemark.
+        
+
+    Before we discuss such a method, let us observe some properties of optimal codes:
+        \begin{enumerate}
+            \item \(\forall i,j, p_{i} \ge p_{j} \implies \abs{c_{i}} \le \abs{c_{j}}\).
+                We could otherwise swap the codeword and obtain a code with a lower ACL.
+
+            \item The least probable symbols have the same length.
+                It's easely noted that if not, we could find a code with a lower ACL.
+
+            \item The longest codewords differ on the last symbols.
+                It follows directly from the previous property.
+        \end{enumerate}
+
+    The procedure itself is pretty straightforward; 
+        it builds a \(d\)-ary tree, \(d\) being the size of the code alphabet,
+        label each brach with a different symbols of the code alphabet and 
+        assigns the codewords by traversing the tree.
+        Practically speaking, we can summarize the algorithm as follow:
+    \begin{enumerate}
+        \item If not available, compute the symbols probabilities by scanning the text.
+        \item Sort the symbols according to their probabilities, non-increseingly.
+        \item Make sure that the number of source symbols \(n\) is \(d + \alpha(d - 1)\),
+            for some integer \(\alpha\).
+            If needed add \emph{dummy} symbols with probability 0.
+        \item Merge the least \(d\) probable symbols in to a node until a root is formed.
+        \item Assign the codeword by traversing the tree.
+    \end{enumerate}
+
+    Is it obvious that encoding a text with Huffman has a significant overhead
+        depending on the code alphabet. We must infact transmit, in addition to the 
+        bit stream, also the tree. Decoding the code is straightforward as well: 
+        we simply traverse the tree and decode each symbol. 
+
+    In terms of complexity Huffman encoding/decoing takes \(\bigO{n \log n}\),
+        where \(n\) is the number of source symbols. 
+
+    In addition to the tree overhead, we have to consider the possibility in 
+        which the tree gets corrupted. In the next few sections we consider two
+        variats of the plain Huffman encoding that try to fix these issues.
+
+    \footnotetext{At that time,
+        Fano and Shannon were looking for a technique to build optimal codes.}
+    \clearpage
+    \begin{example*}
+        Consider the source \(S = \set{a, b, c, d, e, f, g}\), 
+            where \(\Prob{a} = 0.3, \Prob{b} = 0.125\), \(\Prob{c} = 0.125, 
+            \Prob{d} = 0.05, \Prob{e} = 0.1, \Prob{f} = 0.1, \Prob{g} = 0.2\).
+            Provide a ternary Huffman code for \(S\).
+
+        To begin with, let us sort the source symbols; we have: \(a \succeq g \succeq b
+            \succeq c \succeq e \succeq f \succeq d\). Since the number of symbols
+            is of the form \(d + \alpha(d - 1) = 3 + 2*2\), we can move on with merging the nodes.
+            Thus, we consider the three least probable symbols and we merge them;
+            in our case the symbols \(d, e, f\). 
+            Iterating the procedure we get the tree in \Cref{fig:exampleHuffman}.
+
+            \subfile{../../TikZ/Figure 2 - Example of Huffman encoding}
+
+        Therefore, we get the code \(\C* = \set{0, 10, 11, 12, 20, 21, 22}\).
+
+        Assume now receiving the stream \(22 21 22 11 11 0 10 20\); 
+            knowing that the tree used is the one above, what is the encoded string?
+            By trivially traversing the tree, we can easely decode the stream as 
+            \(dfdbbage\).
+    \end{example*}
+
+    \subsection{Canonical Huffman encoding}
+    \subfile{../sub/2.1 - Canonical Huffman encoding.tex}
+
+    \subsection{Adaptive Huffman encoding}
+    \subfile{../sub/2.2 - Adaptive Huffman encoding.tex}
+
+    \nocite{huffman1952}
+\end{document}

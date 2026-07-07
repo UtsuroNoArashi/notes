@@ -1,0 +1,24 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure*}[!hb]
+        \centering
+        \begin{tikzpicture}[
+                every label/.style = { font=\ttfamily\scriptsize },
+                box/.style = { draw, rectangle, minimum size = 1cm, fill = rpLove!50 }
+            ]
+
+            \node (in) {input};
+            \node [box] (BWT) [right= 1cm of in] { BWT };
+            \node (outBWT) [right= 1cm of BWT] {$\bwt[input]$};
+            \node [box] (compressor) [right= 1cm of outBWT] {Compressor};
+            \node (output) [right= 1cm of compressor] {output};
+
+            \draw [-Latex] (in.east) -- (BWT.west);
+            \draw [-Latex] (BWT.east) -- (outBWT.west);
+            \draw [-Latex] (outBWT.east) -- (compressor.west);
+            \draw [-Latex] (compressor.east) -- (output.west);
+            
+
+        \end{tikzpicture}
+    \end{figure*}
+\end{document}

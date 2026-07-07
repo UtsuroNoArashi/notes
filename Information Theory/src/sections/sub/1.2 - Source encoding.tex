@@ -1,0 +1,23 @@
+\documentclass{subfiles}
+\begin{document}
+    A problem arises with sources: the alphabet these use are, in general, 
+        not suitable for transmission. Is for this reason that,
+        as shown in \Cref{fig:shannonSystem}, we make use of transmitters and receivers.
+        Although we describe only the encoding process of a source, 
+        the deconding is trivially symmetric.
+
+    Let \(S\) be a source. A code is defined as a map from the source alphabet 
+        to a new alphabet, called input alphabet. In \Cref{sec:huffmanCodes,sec:arithmeticEncoding,sec:integersEncoding}
+        we consider some particular family of codes, 
+        while in the remainder of this section we introduce some classes of code,
+        as well as some theoretical tools useful for studing codes.
+
+    \subsubsection{Non-singular codes}
+    \subfile{../subsub/1.2.1 - Non-singular codes}
+
+    \subsubsection{Uniquely decodable codes}
+    \subfile{../subsub/1.2.2 - Uniquely decodable codes and Sardinas-Patterson}
+
+    \subsubsection{Prefix codes and the Kraft-McMillan inequality}
+    \subfile{../subsub/1.2.3 - Prefix codes}
+\end{document}
