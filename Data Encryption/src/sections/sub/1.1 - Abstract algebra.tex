@@ -1,0 +1,64 @@
+\documentclass{subfiles}
+\begin{document}
+    Here we provide just some basic definitions and theorems, 
+        the interested reader is referred to more authorial sources\footnotemark.
+
+    Let \(G\) be a set, and let \(+\) denote a binary operation on the elements in \(G\);
+        then, we say that the pair \((G, +)\) is a \emph{group} if the following hold:
+        \begin{enumerate}
+            \item There exists an element \(e \in G\) such that,
+                \(\forall a \in G\) one has that \(e + a = a + e = a\),
+            \item For any element \(a \in G, \exists -a\) such that \(a + (-a) = -a + a = e\), and
+            \item For any three element \(a, b, c \in G\) one has that \((a + b) + c = a + (b +c)\).
+        \end{enumerate}
+        \begin{remark*}
+            Although we give the definition using \(+\) to indicate the group operation,
+                this could differ from the usual addition.
+        \end{remark*}
+    A group for which \(+\) is commutative, i.e, \(a + b = b + a\),
+        is called \emph{abelian}. 
+
+    Let \((G, +)\) be a group and let \(a \in G\). We denote by \(a^{n}\) the \(n\)-th 
+        power of \(a\), and denote the set of all powers of \(a\) by \(\gen{a}\).
+        If it holds that \(G = \gen{a}\), we say that \(G\) is a cyclic group.
+        A subset \(H\) of \(G\) such that \((H, +)\) is a group ,
+        is called sub-group of \(G\), and is said proper sub-group if \(H \ne G\).
+
+    The following holds for cyclic groups:
+        \begin{proposition*}
+            Every cyclic group is abelian. Additionally, 
+                every subgroup a cyclic group is cyclic.
+        \end{proposition*}
+
+    Given a group its \emph{order}, denoted as \(\abs{G}\),
+        is given by the number of elements in it,
+        therefore we can have finite groups and infinite groups.
+        For finite groups the following holds:
+        \begin{theorem*}[Langrange's theorem for groups]
+            Let \((G, +)\) be a group and let \((H, +)\) be one of its sub-groups.
+                Then, it holds that \(\abs{H}\) divides \(\abs{G}\).
+        \end{theorem*}
+
+    \footnotetext{A good starting point is Thomas W. Judson's ``Abstract Algebra: Theory and Applications''.}
+
+    We now move on with defining another abstract structure, 
+        but before doing so, we would like to point out that groups are intensively studied
+        and a whole field of abstract algebra is built around them.
+
+    Following the same approach used for groups, let \(R\) be a set and let 
+        \(+\) and \(*\) be two binary operations on the elements of \(R\).
+        We say that \((R, +, *)\) is a \emph{ring} if the following hold:
+        \begin{enumerate}
+            \item \((R, +)\) is an abelian group,
+            \item There exists \(e' \in R\) such that \(e' * a = a * e' = a, \forall a \in G\),
+            \item For any \(a, b, c \in R\) one has \((a * b) * c = a * (b * c)\);
+                that is, \(*\) is associative, and 
+            \item For all \(a, b, c \in R\) on has \(a * (b + c) = a * b + a * c\);
+                that is, \(*\) distibutes over \(+\).
+        \end{enumerate}
+        All the properties an concepts here introduced for groups also hold for ring.
+            That is, if \(*\) is commutative the ring is called abelian,
+            a subset \(A\) of \(R\) is called sub-ring if \((A, +, *)\) is a ring,
+            and \(R\) is said to be cyclic if there exists \(a \in R\) such that 
+            \(R = \gen{a}\).
+\end{document}
