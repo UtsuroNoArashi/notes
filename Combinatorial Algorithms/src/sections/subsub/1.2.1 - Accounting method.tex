@@ -1,0 +1,31 @@
+\documentclass{subfiles}
+\begin{document}
+    The core idea of the method follows that used by banks.
+        In more details: to each operation we assign a cost,
+        which represents its \emph{amortized cost}.
+        When the amortized cost of an operation exeeds its real cost, 
+        we are left with some credit that we can use to help pay other operations.
+
+    \begin{example*}
+        Consider we need an algorithm to increment a \(n\) bits counter by 
+            an amount \(m\). From a worst case analysis perspective,
+            the algorithm needs a quadratic time, as the \(n\)-th bit may need to be flipped \(m\) times.
+            It comes with no surprise that such a cost is well above the real one,
+            as we are about to see.
+
+        Let us proceed this way: for each bit flip, assume that we are asked to pay 
+            a coin; then we proceed by paying two coins when flipping a bit to 1.
+            The cost of the whole algorithm is easily seen to be given by the number of 
+            total bit flipped. But the following can be observed: the first increment,
+            leaves us with a coin of credit, the second one does the same,
+            etc. Thus, each operation requires a constant amount;
+            that is, the amortized cost of the whole algorithm is \(\bigO{n}\).            
+    \end{example*}
+
+    \begin{remark*}
+        Other methods to perform amortized analysis exist, 
+            and their use varies with the algorithm we need to analyze.
+            Though, all follow the same core idea: we overpay for some operations
+            and use the credit thus produced to pay for others.
+    \end{remark*}
+\end{document}
