@@ -1,64 +1,77 @@
 \documentclass{subfiles}
 \begin{document}
-    Here we provide just some basic definitions and theorems, 
-        the interested reader is referred to more authorial sources\footnotemark.
+    In this section, we first introduce the notion of group, ring and field,
+        we then define what a field extension is and how to it is used. 
+        In describe what above, we assume the reader has a basic understanding of 
+        modulo arithmetics.
 
-    Let \(G\) be a set, and let \(+\) denote a binary operation on the elements in \(G\);
-        then, we say that the pair \((G, +)\) is a \emph{group} if the following hold:
+    \begin{definition*}[Group]
+    Let \(G\) be a set, and let \(*\) denote a binary operation on \(G\)'s elements.
+        We call \emph{group} the pair \((G, *)\) if the following hold:
         \begin{enumerate}
-            \item There exists an element \(e \in G\) such that,
-                \(\forall a \in G\) one has that \(e + a = a + e = a\),
-            \item For any element \(a \in G, \exists -a\) such that \(a + (-a) = -a + a = e\), and
-            \item For any three element \(a, b, c \in G\) one has that \((a + b) + c = a + (b +c)\).
+            \item There exists a neutral element in \(G\);
+                that is, 
+                \[
+                    \exists e \in G \text{ s.t. } \forall a \in G, a * e = e * a = a
+                \]
+            \item Each element has an inverse, i.e, 
+                \[
+                    \forall a \in G, \exists a^{-1} \text{ s.t. } a * a^{-1} = a^{-1} * a = e 
+                \]
+            \item The operation \(*\) is associative, meaning that 
+                \[
+                    \forall a, b, c \in G, (a * b) * c = a * (b * c)
+                \]
         \end{enumerate}
-        \begin{remark*}
-            Although we give the definition using \(+\) to indicate the group operation,
-                this could differ from the usual addition.
-        \end{remark*}
-    A group for which \(+\) is commutative, i.e, \(a + b = b + a\),
-        is called \emph{abelian}. 
+        Additionally, if \(*\) is such that \(a * b = b * a\), i.e., 
+            \(*\) is commutative, we say that the group is \emph{abelian}.
+    \end{definition*}
+    The number of elements of a group \(G\) is said to be its order \(\abs{G}\).
 
-    Let \((G, +)\) be a group and let \(a \in G\). We denote by \(a^{n}\) the \(n\)-th 
-        power of \(a\), and denote the set of all powers of \(a\) by \(\gen{a}\).
-        If it holds that \(G = \gen{a}\), we say that \(G\) is a cyclic group.
-        A subset \(H\) of \(G\) such that \((H, +)\) is a group ,
-        is called sub-group of \(G\), and is said proper sub-group if \(H \ne G\).
+    \begin{definition*}[Cyclic group]
+        Let \((G, *)\) be a group, and let \(a \in G\). We denote by \(a^{n}\)
+            the \(n\)-th power of \(a\), and denote the set of all such powers by 
+            \(\gen{a}\). We say that \((G, *)\) is cyclic if \(\gen{a} = G\).
+    \end{definition*}
 
-    The following holds for cyclic groups:
-        \begin{proposition*}
-            Every cyclic group is abelian. Additionally, 
-                every subgroup a cyclic group is cyclic.
-        \end{proposition*}
+    \begin{definition*}[Sub-group]
+        Given \((G, *)\) a group, we say that \(H \subseteq G\) forms a sub-group
+            under \(*\), if \((H, *)\) is itself a group.
+    \end{definition*}
 
-    Given a group its \emph{order}, denoted as \(\abs{G}\),
-        is given by the number of elements in it,
-        therefore we can have finite groups and infinite groups.
-        For finite groups the following holds:
-        \begin{theorem*}[Langrange's theorem for groups]
-            Let \((G, +)\) be a group and let \((H, +)\) be one of its sub-groups.
-                Then, it holds that \(\abs{H}\) divides \(\abs{G}\).
+    The following is one of the core theorems in group theory,
+        and its extentions to rings, comes in handy when dealing with fields.
+        \begin{theorem*}[Lagrange's theorem]
+            Let \((G, *)\) be a group and let \((h, *)\) be a subgroup of \(G\).
+            Then, it holds that \(\abs{H} \text{ divides } \abs{G}\).
         \end{theorem*}
 
-    \footnotetext{A good starting point is Thomas W. Judson's ``Abstract Algebra: Theory and Applications''.}
+    Groups are one of several algebraic structure, among which we also consider 
+        rings and fields. The latter will be at the center of our discussion on 
+        cryptography.
 
-    We now move on with defining another abstract structure, 
-        but before doing so, we would like to point out that groups are intensively studied
-        and a whole field of abstract algebra is built around them.
+    \begin{definition*}[Ring]
+        Let \(R\) be a set, and let \(+, *\) be two distinct binary operations
+            on \(R\)'s elements. We say that \((R, +, *)\) is a ring if 
+            \begin{enumerate}
+                \item \((R, +)\) is an abelian group;
+                \item The operation \(*\) is associative;
+                \item The operation \(*\) distibutes over \(+\); that is,
+                    \[
+                        \forall a, b, c \in G, a * (b + c) = a * b + a * c.
+                    \]
+            \end{enumerate}
+        Additionally, if \(R\) has a multiplicative unit, i.e., \(\exists e' \in R\)
+        such that \(e' * a = a * e' = a, \forall a \in R\) and \(*\) is commutative,
+        we say that \((R, +, *)\) is a commutative ring with unity.
+    \end{definition*}
+    In what follows we denote by \(\field^{*}\) the ring \(\field \setminus \set{0}\).
 
-    Following the same approach used for groups, let \(R\) be a set and let 
-        \(+\) and \(*\) be two binary operations on the elements of \(R\).
-        We say that \((R, +, *)\) is a \emph{ring} if the following hold:
-        \begin{enumerate}
-            \item \((R, +)\) is an abelian group,
-            \item There exists \(e' \in R\) such that \(e' * a = a * e' = a, \forall a \in G\),
-            \item For any \(a, b, c \in R\) one has \((a * b) * c = a * (b * c)\);
-                that is, \(*\) is associative, and 
-            \item For all \(a, b, c \in R\) on has \(a * (b + c) = a * b + a * c\);
-                that is, \(*\) distibutes over \(+\).
-        \end{enumerate}
-        All the properties an concepts here introduced for groups also hold for ring.
-            That is, if \(*\) is commutative the ring is called abelian,
-            a subset \(A\) of \(R\) is called sub-ring if \((A, +, *)\) is a ring,
-            and \(R\) is said to be cyclic if there exists \(a \in R\) such that 
-            \(R = \gen{a}\).
+    \begin{definition*}[Field]
+        Given a commutative ring with unity \((R, +, *)\), we say that \((R, +, *)\)
+            is a field if \((R^{*}, +, *)\) is commutative.
+    \end{definition*}
+    Similarly for groups, each field has an order given by the number of its elements.
+        In these notes we mostly consider fields of order a prime and denote these by \(\gf{p}\),
+        for some prime number \(p\).
 \end{document}
