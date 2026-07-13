@@ -1,0 +1,22 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[
+                every node/.style={ font = \ttfamily\tiny },
+                iNode/.style={draw, circle, minimum size=0.1, fill=rpRose!50}
+            ]
+            \graph[tree layout] {
+                "y" [iNode] -- {
+                    "x" [iNode] -- {
+                        "$\alpha$",
+                        "$\beta$"
+                    },
+                    "$\delta$"
+                }
+            };
+        \end{tikzpicture}
+        \caption{Example of a RB tree.}
+        \label{fig:RB-rotations-sample}
+    \end{figure}
+\end{document}

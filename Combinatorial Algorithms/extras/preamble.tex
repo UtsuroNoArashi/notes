@@ -3,7 +3,24 @@
 \author{Riccardo Lo Iacono}
 
 % Document specific commands
+\DeclareDocumentCommand{\ofO}{m}{
+    \mathcal{O} \lparen #1 \rparen
+}
+
+\DeclareDocumentCommand{\ofT}{m}{
+    \Theta \lparen #1 \rparen
+}
+
+\DeclareDocumentCommand{\ofW}{m}{
+    \Omega \lparen #1 \rparen
+}
+
+\DeclareDocumentCommand{\bh}{O{x}}{
+    \mathtt{bh} \lparen #1 \rparen
+}
 
 % BibTeX files 
 
 % Acronyms
+\newacronym{rb}{RB}{Red-Black Trees}
+\newacronym{bst}{BST}{Binary Search Trees}

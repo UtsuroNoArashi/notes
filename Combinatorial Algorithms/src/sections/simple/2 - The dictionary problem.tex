@@ -1,0 +1,17 @@
+\documentclass{subfiles}
+\begin{document}
+    We turn our attention to one of the most common problem of computer science:
+        the \emph{dictionary problem}.
+        In more details, we are given a set of elements \(S\) of some fixed universe \(U\),
+        and we are asked to design a data structure that allows to search,
+        add and remove elements as efficiently as possible.
+
+    The problem has several solutions, 
+        each depending on the existece of a total order relation on the elements of \(S\).
+        Here we present \gls{rb} as solution for the case in which a relation exists;
+        while the notion of self-adjusting data structure is explored for case in which
+        no such relation is available.
+
+    \subsection{Red-Black trees}
+    \subfile{../sub/2.1 - Red-Black trees}
+\end{document}

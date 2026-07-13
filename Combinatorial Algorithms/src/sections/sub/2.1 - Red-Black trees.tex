@@ -1,0 +1,28 @@
+\documentclass{subfiles}
+\begin{document}
+    Red-Black trees are a special type of \gls{bst},
+        from which they differ for the following properties:
+        \begin{itemize}
+            \item Each node of a RB tree is either red or black;
+            \item The root of a RB tree is always black;
+            \item Each leaf is black;
+            \item Each red node has only black children; and 
+            \item For each node, all simple path from the node to a descendant leaf,
+                contains the same number of black nodes.
+        \end{itemize}
+    
+    For any RB tree \(T\), the following result holds.
+    \begin{lemma*}
+        If \(T\) is a Red-Black tree with \(n\) internal nodes, 
+            then \(T\) has height at \(2 \log(n + 1)\).        
+    \end{lemma*}
+    The proof of the above Lemma is based on the notion of black height of a RB tree,
+        which essentially represents the number of black nodes in the path from 
+        a node (the proof considers the root) to any descendant leaf.
+
+    In \cref{sec:RB-rotations} we describe the rotation operations needed to implement the dictionary  
+        operations, later described in \Cref{sec:RB-search,sec:RB-insert,sec:RB-delete}.
+
+    \subsubsection{Rotations}
+    \subfile{../subsub/2.1.1 - RB rotations}
+\end{document}

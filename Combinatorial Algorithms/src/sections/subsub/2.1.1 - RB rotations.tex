@@ -1,0 +1,22 @@
+\documentclass{subfiles}
+\begin{document}\label{sec:RB-search}
+    As easily understood, RB trees require additional work to ensure that each property holds.
+        In fact, differently from BSTs, the insertion and/or deletion of a node may cause 
+        one or more property to break, as discussed in more detail in \Cref{sec:RB-insert,sec:RB-delete}.
+
+    To fix these issue, some auxiliary functions need to be defined;
+        these in turns make use of \emph{rotation} which are local operations on pointers.
+        Rotations are essentially of two types: left-to-right (or simply left-rotation) and 
+        right-to-left (or simply right rotation).
+        We simply consider right rotations, as left rotations are symmetric. 
+
+    Consider the sample tree shown in \Cref{fig:RB-rotations-sample}. 
+        Assume that after some operations we need to apply a right rotation on node \(x\).
+        Then we proceed as follow: we let \(y\) point to be \(x\) left children, 
+        we link \(x\)'s parent to \(y\) and move \(x\) to \(y\)'s right.
+        In \autoref{proc:RB-rotate-right} we provide the pseudo code to implement RB's right rotation.
+
+    \subfile{../TikZ/Figure 1 - RB rotations example}
+    \subfile{../TikZ/Procedure 1 - RB right rotation}
+
+\end{document}

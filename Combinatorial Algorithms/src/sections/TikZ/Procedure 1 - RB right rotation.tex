@@ -1,0 +1,24 @@
+\SetKw{KwNil}{nil}
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}[!h]
+        \caption{Rotate-right($T, x$)}\label{proc:RB-rotate-right}
+        $ y = x.left $ \;\DontPrintSemicolon
+        $ x.left = y.right $ \;\DontPrintSemicolon
+        \uIf{$ y.right \ne \KwNil $}{
+            $ y.right.p = x $
+        }
+        $ y.p = x.p $ \;\DontPrintSemicolon
+        \uIf{$ x.p == \KwNil $} {
+            $ T.root = y $
+        }
+        \uElseIf{$ x == x.p.right $}{
+            $ x.p.right = y $
+        }
+        \Else{
+            $ x.p.left = y $ \;\DontPrintSemicolon
+            $ x.right = x $ \;\DontPrintSemicolon
+            $ x.p = y $
+        }
+    \end{procedure}
+\end{document}
