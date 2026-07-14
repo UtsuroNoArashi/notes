@@ -1,0 +1,15 @@
+\documentclass{subfiles}
+\begin{document}
+    Named after its inventors, \citeauthor{RivestSA1977},
+        RSA is a public-key schema based on the hardness of integers factorization.
+        The core idea is simple: choose two odd prime \(p\) and \(q\) and compute their product \(n\).
+        If \(m\) is the message to be transmitted, encode it using \(n\) and send the encoded message.
+        \autoref{proc:RSA-keygen} describes how each entity involved computes its keys,
+            while \autoref{proc:RSA-encode-decode} shows how a message is encoded/decoded.
+
+        \subfile{../TikZ/Procedure 1 - RSA keygen}
+        Here \(e\) is called \emph{encryption key} and \(d\) is called \emph{decryptio key},
+        while \(n\) is called \emph{modulo}.
+
+        \subfile{../TikZ/Procedure 2 - RSA encode-decode}
+\end{document}

@@ -1,0 +1,17 @@
+\documentclass{subfiles}
+\begin{document}
+    Todays cryptography is almost entirely based on public-key schemas.
+        Broadly speaking, each of the entities involved in the communication 
+        owns a public key \(e\), available by everyone, and a private key \(d\)
+        that must be kept secret. To each key a transformation is associated,
+        respectively to encrypt and decrypt the message.
+
+    Here we focus on the most used public-key schemas, while in \Cref{sec:digital-signature}
+        we describe how such schemas are used to garantee the autenticity of messages.
+        Each of the schemas we are about to discuss is based on the hardness of some mathematical problem.
+        Also, we denote by \(A\) and \(B\) two entities that want to communicate,
+        and by \(E\) some unauthorized user.
+
+    \subsection{RSA schema}
+    \subfile{../sub/2.1 - RSA}
+\end{document}

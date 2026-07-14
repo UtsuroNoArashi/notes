@@ -1,0 +1,10 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{RSA-Keygen()}\label{proc:RSA-keygen}
+        \nl Choose two odd prime numbers $ p $ and $ q $ and compute $ n = pq $ \DontPrintSemicolon\;
+        \nl Compute $ l = (p - 1)(q - 1) $ and choose $ 1 \le e < l$ such that $ \gcd(e, l) = 1$ \DontPrintSemicolon\;
+        \nl Using the extended Euclidean algorithm, find $ d $ such that \(ed \equiv 1 \mod l\) \DontPrintSemicolon\;
+        \nl Publish $ (n, e) $ as public key.
+    \end{procedure}
+\end{document}

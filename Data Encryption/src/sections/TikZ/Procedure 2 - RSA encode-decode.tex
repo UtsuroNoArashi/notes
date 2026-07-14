@@ -1,0 +1,11 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{RSA-Encode-Decode()}\label{proc:RSA-encode-decode}
+        \nl Get a copy of $ A $'s public key \;\DontPrintSemicolon
+        \nl Convert your message as an integer $ m \in [0, n - 1] $\DontPrintSemicolon\;
+        \nl Cypher $ m $ as the integer $ c = m^{e} \mod n $ and transmit $ c $ to $ A $ \DontPrintSemicolon\;
+        \tcc{On the reciveing side:}
+        \nl Retrieve $ m $ by computing $ c^{ed} \mod n $
+    \end{procedure}
+\end{document}
