@@ -1,0 +1,42 @@
+\SetKw{KwNil}{nil}
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{Insert-fixup(T, z)}\label{proc:RB-insert-fixup}
+        \While{$ z.p.color == $ ``Red''}{
+            \uIf{$ z.p == z.p.p.left $}{
+                $y = z.p.p.right$ \;\DontPrintSemicolon
+                \uIf{$ y.color == $ ``Red''}{
+                    $ z.p.color = $ ``Black'' \;\DontPrintSemicolon
+                    $ y.color = $ ``Black'' \;\DontPrintSemicolon
+                    $ z.p.p.color = $ ``Red'' \;\DontPrintSemicolon
+                    $ z = z.p.p $ \;\DontPrintSemicolon
+                }
+                \uElseIf{$ z == z.p.right $}{
+                    \Indp$ z = z.p $ \;\DontPrintSemicolon
+                    Rotate-left(T, z) \;\DontPrintSemicolon
+                    \Indm$ z.p.color = $ ``Black'' \;\DontPrintSemicolon
+                    $ z.p.p.color = $ ``Red'' \;\DontPrintSemicolon
+                    Rotate-right(T, z.p.p) \;\DontPrintSemicolon
+                }
+            }
+            \uElse{
+                $y = z.p.p.left$ \;\DontPrintSemicolon
+                \uIf{$ y.color == $ ``Red''}{
+                    $ z.p.color = $ ``Black'' \;\DontPrintSemicolon
+                    $ y.color = $ ``Black'' \;\DontPrintSemicolon
+                    $ z.p.p.color = $ ``Red'' \;\DontPrintSemicolon
+                    $ z = z.p.p $ \;\DontPrintSemicolon
+                }
+                \uElseIf{$ z == z.p.left $}{
+                    \Indp$ z = z.p $ \;\DontPrintSemicolon
+                    Rotate-right(T, z) \;\DontPrintSemicolon
+                    \Indm$ z.p.color = $ ``Black'' \;\DontPrintSemicolon
+                    $ z.p.p.color = $ ``Red'' \;\DontPrintSemicolon
+                    Rotate-left(T, z.p.p) \;\DontPrintSemicolon
+                }
+            }
+        }
+        $ T.root.color = $ ``Black''
+    \end{procedure}
+\end{document}

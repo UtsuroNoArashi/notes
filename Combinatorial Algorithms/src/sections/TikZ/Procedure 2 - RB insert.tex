@@ -1,0 +1,32 @@
+\SetKw{KwNil}{nil}
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{RB-Insert(T, z)}\label{proc:RB-insert}
+        $ y = \KwNil $ \;\DontPrintSemicolon
+        $ x = T.root $ \;\DontPrintSemicolon
+        \While{$ x \ne \KwNil $}{
+            $ y = x $ \;\DontPrintSemicolon
+            \uIf{$ z.key < x.key $}{
+                $ x = x.left $
+            }
+            \uElse{
+                $ x = x.right $
+            }
+        }
+        $ z.p = y $ \;\DontPrintSemicolon
+        \uIf{$ y == \KwNil $}{
+            $ T.root = z $
+        }
+        \uElseIf{$ z.key < y.key $}{
+            $ y.left = z $
+        }
+        \uElse{
+            $ y.right = z $
+        }
+        $ z.left = \KwNil $ \;\DontPrintSemicolon
+        $ z.right = \KwNil $ \;\DontPrintSemicolon
+        $ z.color = $ ``Red'' \;\DontPrintSemicolon
+        Insert-fixup(T, z)
+    \end{procedure}
+\end{document}
