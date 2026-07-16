@@ -1,0 +1,34 @@
+\SetKw{KwNil}{nil}
+\SetKw{KwAnd}{and}
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{RB-delete-fixup(T, x)}\label{proc:RB-delete-fixup}
+        \While{$ x \ne T.root \KwAnd x.color \ne $ ``Black''}{
+            \uIf{$ x == x.p.left $}{
+                $ w = x.p.right$ \DontPrintSemicolon\;
+                \uIf{$ w.color == $ ``Red''}{
+                    $ w.color = $ ``Black'' \DontPrintSemicolon\;
+                    $ x.p.color = $ ``Red'' \DontPrintSemicolon\;
+                    $ Rotate-left(T, x.p)$ \DontPrintSemicolon\;
+                }
+                \uIf{$ w.left.color == $ ``Black'' \KwAnd $ w.right.color == $ ``Black''}{
+                    $ w.color = $ ``Red'' \DontPrintSemicolon\;
+                    $ x = x.p $ \DontPrintSemicolon\;
+                }
+                \uElseIf{$ w.right.color == $ ``Red''}{
+                    $ w.left.color =$ ``Black'' \DontPrintSemicolon\;
+                    $ w.color = $ ``Red`` \DontPrintSemicolon\;
+                    $ Rotate-right(T, w) $ \DontPrintSemicolon\;
+                    $ w = x.p.left$ \DontPrintSemicolon\;
+                }
+                $ w.color = x.p.color $ \DontPrintSemicolon\;
+                $ x.p.color =  $ ``Black'' \DontPrintSemicolon\;
+                $ Rotate-left(T, x.p)$ \DontPrintSemicolon\;
+                $ x = T.root$
+            }
+            \uElse{( same as above with ``right`` and ``left'' exchanged )}
+        }
+        $ x.color =  $ ``Black''
+    \end{procedure}
+\end{document}

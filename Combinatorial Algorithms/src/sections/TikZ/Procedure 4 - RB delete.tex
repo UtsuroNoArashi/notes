@@ -1,0 +1,36 @@
+\SetKw{KwNil}{nil}
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{RB-delete(T, z)}\label{proc:RB-delete}
+        $ y = z $ \DontPrintSemicolon\;
+        $ y-starting-color = y.color $ \DontPrintSemicolon\;
+        \uIf{$ z.left == \KwNil $}{
+            $ x = z.right $ \DontPrintSemicolon\;
+            $ RB-transplant(T, z, z.right) $ \DontPrintSemicolon\;
+        }
+        \uElseIf{$z.right == \KwNil$}{
+            $ x = z.left$ \DontPrintSemicolon\;
+            $ RB-transplant(T, z, z.left) $ \DontPrintSemicolon\;
+        }
+        \uElse{
+            $ y = Tree-Min(z.right) $ \DontPrintSemicolon\;
+            $ x = y.right $ \DontPrintSemicolon\;
+            \uIf{$ y.p == z $}{
+                $ x.p = z $ \DontPrintSemicolon\;
+            }
+            \uElse{
+                $ RB-transplant(T, y, y.right) $ \DontPrintSemicolon\;
+                $ y.right = z.right $ \DontPrintSemicolon\;
+                $ y.right.p = y $ \DontPrintSemicolon\;
+            }
+            $ RB-transplant(T, z, y) $ \DontPrintSemicolon\;
+            $ y.left = z.left $ \DontPrintSemicolon\;
+            $ y.left.p = y$ \DontPrintSemicolon\;
+            $ y.color = z.color $ \DontPrintSemicolon\;
+        }
+        \uIf{$ y-starting-color == $ ``Black''}{
+            $ RB-delete-fixup(T, x) $
+        }
+    \end{procedure}
+\end{document}

@@ -1,4 +1,41 @@
 \documentclass{subfiles}
 \begin{document}\label{sec:RB-delete}
-    % TODO
+    Similarly for insertion, deleting a node from a red-black tree works as for the BSTs,
+        with a few differences depending on the original position of the node to remove.
+        As before, we make use of an auxiliary procedure to fix any any violations.
+        In \autoref{proc:RB-delete} the pseudo code to implement deletion is shown,
+        while in \autoref{proc:RB-delete-fixup} we show the pseudo code for the auxiliary procedure.
+
+    Let us consider which properties may be violated: first,
+        property 2 fails to hold when the node to remove was the root and the new root is black,
+        Property 4 fails when both the replacing node and it's right child are red;
+        lastly, properties 1 and 5 fail when nodes are moved around.
+
+    \subfile{../TikZ/Procedure 4 - RB delete}
+
+    We can analyze \autoref{proc:RB-delete-fixup} as eight cases, pairwise symmetric.
+        We consider for this reason only case 1-4.
+        To ease our explanation, let \(z\) be the node to remove,\(z.p\) its parent, 
+        \(y\) theminimum in the \(z\)'s right sub-tree and let \(x\) be \(y\)'s right child.
+        \begin{description}
+            \item [Case 1: \(\mathbf{x}\)'s sibling \(\mathbf{w}\) is ``Red''.]
+                We know that \(w\) must have a black children,
+                thus a rotation on \(x.p\) will solve the violation.
+
+            \item [Case 2: \(\mathbf{w}\) is ``Black'' and so are its children.]
+                Since both \(x\) and \(w\) are black, we simply ``push'' the blackness
+                upward, and repeat the procedure on the parent.
+
+            \item [Case 3: \(\mathbf{w}\) is ``Black'', its left child is ``Red'' and the left child is ``Red''.]
+                A simple color exchange between \(w\) and \(w.left\) followed by a right rotation,
+                fixes the issue.
+
+            \item [Case 4: \(\mathbf{w}\) is ``Black'' and its right child is ``Red''.]
+                Some color exchanges and a left rotation on \(x.p\) will solve the violations.
+        \end{description}
+        As for insertion, once the loop has finished the only property that may still fail is property
+            2, which is fixed by recolorig the root.
+
+        \subfile{../TikZ/Procedure 5 - RB delete fixup}
+        
 \end{document}
