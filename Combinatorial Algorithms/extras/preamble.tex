@@ -19,8 +19,16 @@
     \mathtt{bh} \lparen #1 \rparen
 }
 
+\DeclareDocumentCommand{\E}{O{p} m}{
+    \mathbb{E}_{ #2 } \lparen #1 \rparen
+}
+
 % BibTeX files 
+\addbibresource{../extras/BibTeX/papers.bib}
 
 % Acronyms
+\newacronym{t}{T}{Transpose}
+\newacronym{fc}{FC}{Frequency Count}
+\newacronym{mtf}{MTF}{Move-To-Front}
 \newacronym{rb}{RB}{Red-Black Trees}
 \newacronym{bst}{BST}{Binary Search Trees}

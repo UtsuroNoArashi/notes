@@ -1,17 +1,26 @@
 \documentclass{subfiles}
 \begin{document}
-    We turn our attention to one of the most common problem of computer science:
-        the \emph{dictionary problem}.
-        In more details, we are given a set of elements \(S\) of some fixed universe \(U\),
-        and we are asked to design a data structure that allows to search,
-        add and remove elements as efficiently as possible.
+    Now, we focus our attention to one of the most common problems in computer science,
+        namely, the \emph{dictionary problem} which can be roughfully defined as follow:
+        given a set of items \(S\), we want to define a data structure such that the following 
+        three operations are performed efficiently.
+        \begin{center}
+            Search(S, x) \\ 
+            Insert(S, x) \\ 
+            Delete(S, x)
+        \end{center}
+    The following assumpion are considered: accessing or deleting an item \(i\) takes time \(i\),
+        insertion takes time \(i + 1\) and puts the element at the end of the list.
 
-    The problem has several solutions, 
-        each depending on the existece of a total order relation on the elements of \(S\).
-        Here we present \gls{rb} as solution for the case in which a relation exists;
-        while the notion of self-adjusting data structure is explored for case in which
-        no such relation is available.
+    We begin our discussion on the problem with the following trivial remark: 
+        if the elements have some kind of total order relation, then trees provide the best approach;
+        if not the best possible solution is given by lists.
 
-    \subsection{Red-Black trees}
-    \subfile{../sub/2.1 - Red-Black trees}
+    Here we discuss two type of solutions, namely,
+        self-adjusting lists (for the case in which no order relation exists) and self-adjusting trees
+        (for the other case). Specifically, for self-adjusting trees we discuss, in order,
+        red-black trees (\Cref{sec:rb-trees}) and splay trees (\Cref{sec:splay-trees}).
+
+    \subsection{Self-adjusting lists}
+    \subfile{../sub/2.1 - Self-adjusting lists}
 \end{document}

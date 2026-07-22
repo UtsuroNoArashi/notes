@@ -1,0 +1,46 @@
+\documentclass{subfiles}
+\begin{document}
+    Our discussion on self-adjusting lists will proceed as follow: 
+        first, we introduce the definition of self-adjusting list;
+        then, we focus our attention on some of the most common rules used to keep a list organized.
+
+    Conceptually, self-adjusting lists are trivial:
+        these are lists in which, after accessing or inserting an item, 
+        some update procedure is called to keep the list organized.
+        These procedure are defined according to some rules,
+        among which those that stands out are 
+        \begin{itemize}
+            \item \emph{\gls{fc}}: we mantain an array that stores at each position \(i\),
+                the count of how many times item \(i\) has been accessed or added;
+            \item \emph{\gls{mtf}:} each time an item is added, it is moved to the head of the list,
+                while each accessed item is moved slighly closer to the root;
+            \item \emph{\gls{t}:} accessing or inserting an item, implies an exchange of the added/%
+                accessed item with the one on its left.
+        \end{itemize}
+    
+    Let \(\E{A}\) be the expected cost to access an item using algorithm \(A\), 
+        where \(p = \set{p_{1}, p_{2}, \ldots, p_{n}}\) is the probability distribution associated
+        to the sequence of operations. Assume \(DP\) to be an algorithm that 
+        orders the elements according to \(p\). By the law of large numbers it follows \(\E{FC}/\E{DP} = 1\).
+        Additionally, one could prove that \(\E{MTF} \le 2 \E{DP}\),
+        and as proved in \cite{Rivest1976} \(\E{T} \le \E{MTF}\). 
+        A similar result can be easily derived for insertions and deletions.
+        From the above, it follows that, at least in theory, 
+        both FC and transpose out perform MTF. As we are about to show, theory and practice not always coincide.
+        What we want to show is that, although in theory FC and transpose are better then MTF,
+        in practical applications MTF performs better.
+        
+    For any algorithm \(A\), let us denote with \(C_{A}(s)\) the total cost of all operations,
+        by \(F_{A}(s)\) the number of exchanges that move an item to the head of the list,
+        and by \(P_{A}(s)\) any other exchange. The following holds.
+
+    \begin{theorem}[\cite[Theorem 1.]{SleatorT1985}]\label[theorem]{thm:SleatorT1985-thm-1}
+        For any Algorithm \(A\) and any sequence of operations \(s\) starting with the empty set
+        \[
+            C_{MTF}(s) \le C_{A}(s) + P_{A}(s) - F_{A}(s) - m.
+        \]
+    \end{theorem}
+    \Cref{thm:SleatorT1985-thm-1} and its generalized version (see \cite[Theorem 2.]{SleatorT1985}),
+    show that MTF differs by any other algorithm by a most a factor of 2. No analogous result 
+    holds for FC and transpose.
+\end{document}

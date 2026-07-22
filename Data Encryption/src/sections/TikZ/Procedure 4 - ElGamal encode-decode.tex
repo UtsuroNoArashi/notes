@@ -1,0 +1,14 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{procedure}
+        \caption{ElGamal-Encode-Decode()}\label{proc:ElGamal-encode-decode}
+        \nl Get a copy of $A$'s \DontPrintSemicolon\;
+        \nl Convert the message \(m\) as an integer in the range $[1, p-2]$ \DontPrintSemicolon\;
+        \nl Randomly choose $k, 1 \le k \le p - 2$, then compute $ \delta = \gamma^{k}$ and 
+            $\epsilon = m (\gamma^{a})^{k}$ \DontPrintSemicolon\;
+        \nl Forward $(\delta, \epsilon)$ to $A$\DontPrintSemicolon\;
+        \tcc{On the receiving side:} 
+        \nl Use the private key $a$ to compute $\delta^{p - 1 - a} = \delta^{-a}$ \DontPrintSemicolon\;
+        \nl Retrieve $m$ by computing $\delta^{-a} \epsilon \mod p$
+    \end{procedure}
+\end{document}
