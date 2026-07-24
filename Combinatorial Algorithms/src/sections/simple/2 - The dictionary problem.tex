@@ -1,20 +1,21 @@
 \documentclass{subfiles}
 \begin{document}
     Now, we focus our attention to one of the most common problems in computer science,
-        namely, the \emph{dictionary problem} which can be roughfully defined as follow:
-        given a set of items \(S\), we want to define a data structure such that the following 
+        namely, the \emph{dictionary problem} which can be roughly defined as follow:
+        given a set of items \(S\), define a data structure such that the following 
         three operations are performed efficiently.
         \begin{center}
             Search(S, x) \\ 
             Insert(S, x) \\ 
             Delete(S, x)
         \end{center}
-    The following assumpion are considered: accessing or deleting an item \(i\) takes time \(i\),
-        insertion takes time \(i + 1\) and puts the element at the end of the list.
+    The following assumption on operations cost is taken: accessing or deleting an item costs 
+        \(i\) while an insertion costs \(i + 1\),
+        where \(i\) is the length of the list preceeding the item.
 
     We begin our discussion on the problem with the following trivial remark: 
         if the elements have some kind of total order relation, then trees provide the best approach;
-        if not the best possible solution is given by lists.
+        if not, the best possible solution is given by lists.
 
     Here we discuss two type of solutions, namely,
         self-adjusting lists (for the case in which no order relation exists) and self-adjusting trees
