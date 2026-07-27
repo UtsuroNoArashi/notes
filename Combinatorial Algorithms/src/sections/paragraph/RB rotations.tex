@@ -1,0 +1,16 @@
+\documentclass{subfiles}
+\begin{document}
+    As we shall see, insertion and deletion on a RB tree are everything but simple. 
+        We shall in fact see that either of the two operations
+        may cause one or more properties to fail.
+        To fix this issues specific procedures are used to restore each property;
+        in doing so some local pointer manipulations are made,
+        which here we refer to as rotations.
+        We describe left rotations, the other being symmetrical.
+
+    \subfile{../TikZ/Figure 1 - RB rotations}
+    Consider the case shown in \Cref{fig:RB-rotations-a}.
+        To obtain the tree in \Cref{fig:RB-rotations-b} we proceed as follow:
+        we let \(y\)'s left child to be \(x\)'s new right child,
+        and we make \(x\) be the new \(y\)'s left child.
+\end{document}

@@ -1,0 +1,50 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{figure}[!h]
+        \centering
+        \begin{subfigure}{0.4\textwidth}
+            \centering
+            \begin{tikzpicture}
+                [
+                    internal/.style = {draw, fill = rpText, circle, minimum size = 0.1cm},
+                    leaf/.style = {draw, color = rpBase, circle, minimum size = 0.1cm},
+                    scale = 0.8
+                ] 
+
+                \graph[tree layout] {
+                    "" [internal, "x" left] -- {
+                        "" [leaf, "$\alpha$" below],
+                        "" [internal, "y" right] -- {
+                            "" [leaf, "$\beta$" below],
+                            "" [leaf, "$\gamma$" below]
+                        }
+                    }
+                };
+
+            \end{tikzpicture}
+            \caption{}\label{fig:RB-rotations-a}
+        \end{subfigure}
+        \begin{subfigure}{0.4\textwidth}
+            \centering
+            \begin{tikzpicture}
+                [
+                    internal/.style = {draw, fill = rpText, circle, minimum size = 0.1cm},
+                    leaf/.style = {draw, color = rpBase, circle, minimum size = 0.1cm},
+                    scale = 0.8
+                ] 
+
+                \graph[tree layout] {
+                    "" [internal, "y" left] -- {
+                        "" [internal, "x" right] -- {
+                            "" [leaf, "$\alpha$" below],
+                            "" [leaf, "$\beta$" below]
+                        },
+                        "" [leaf, "$\gamma$" below]
+                    }
+                };
+            \end{tikzpicture}
+            \caption{}\label{fig:RB-rotations-b}
+        \end{subfigure}
+        \caption{An example of left (resp. right) rotation.}
+    \end{figure}
+\end{document}

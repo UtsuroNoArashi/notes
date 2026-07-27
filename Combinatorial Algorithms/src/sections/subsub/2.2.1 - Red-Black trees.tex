@@ -1,0 +1,31 @@
+\documentclass{subfiles}
+\begin{document}\label{sec:rb-trees}
+    A special variant of \gls{bst}, RB trees allow to implement the operations of 
+        \lstinline{Search(S, x)}, \lstinline{Insert(T, x)} and \lstinline{Delete(T, x)} in 
+        \(\ofO{\log n}\) time. 
+
+    Formally speaking, RB trees are binary search trees satisfying the following properties:
+    \begin{enumerate}
+        \item \label[Property]{prop:rb-prop-1} Each internal node is either red or black.
+        \item \label[Property]{prop:rb-prop-2} The root is black.
+        \item \label[Property]{prop:rb-prop-3} Each leaf is black.
+        \item \label[Property]{prop:rb-prop-4} Each red node has only black children.
+        \item \label[Property]{prop:rb-prop-5} Any simple path from a node to a descendant leaf,
+            contains the same number of black nodes.
+    \end{enumerate}
+
+    \Cref{prop:rb-prop-5} implicitly defines a mesure to which, for a given node \(x\),
+        we refer to as the black height \(\bh\). That is,
+        \(\bh\) is the number of black nodes in the path from \(x\) to any of its descendant leaf.
+        The following result easily follows.
+        \begin{lemma}
+            If \(T\) is a Red-Black tree with \(n\) nodes, 
+                then \(T\) has height at most \(2 \log(n + 1)\).
+        \end{lemma}
+        \begin{proof}
+            Follows immediately by a simple induction on \(n\).
+        \end{proof}
+
+    \paragraph{Rotations}
+    \subfile{../paragraph/RB rotations}
+\end{document}
