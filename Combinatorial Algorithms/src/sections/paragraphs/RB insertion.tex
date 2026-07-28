@@ -1,42 +1,40 @@
 \documentclass{subfiles}
 \begin{document}
     In our discussion on RB insertion we assume the following: 
-        for any node \(x\), \(x.r\) denotes the right children of \(x\), 
+        for any node \(x\), \(x.r\) denotes the right child of \(x\), 
         likewise \(x.l\) denoets the left child, \(x.p\) denotes \(x\)'s parent, 
         and \(x.c\) is \(x\)'s color.
         Additionally, for any inserted node \(x\),  \(x.l\) and \(x.r\) are set to \lstinline{nil},
-        which we assume to be black, and \(x.c\) is red.
+        which we assume to be black, and \(x.c\) is red. We refer to the inserted node with \(z\).
 
     We now discuss RB insertion focusing on which of the RB properties may fail after insertion,
         and how these are fixed.
 
     First, observe that after insertion every node is either red or black,
         and thus \Cref{prop:rb-prop-1} holds, similarly \Cref{prop:rb-prop-3} holds as the newly 
-        inserted node has \(x.l\) and \(x.r\) set to \lstinline{nil},
+        inserted node has \(z.l\) and \(z.r\) set to \lstinline{nil},
         and so does \Cref{prop:rb-prop-5} since no new black node has been added.
         On the other hand, \Cref{prop:rb-prop-2} may fail if the inserted node replaces the root,
-        while \Cref{prop:rb-prop-4} fails when \(x.p\) is red.
+        while \Cref{prop:rb-prop-4} fails when \(z.p\) is red.
 
     \subfile{../TikZ/Procedure - RB insertion.tex}
 
     With respect to \autoref{proc:RB-insertion}, which shows the pseudo code to implement RB insertion,
         we show how \lstinline{RB-Insert-Fixup} restores each of the RB properties.
-        We analyze the case in which \(x.p\) is a left child of \(x.p.p\), 
-        the other case begin symmetrical. Three major cases arise:
         \begin{description}
-            \item [Case 1: \(\mathbf{x}\)'s uncle \(\mathbf{y}\) is red. ]
-                Since both \(x.p\) and \(y\) are red, and \(x.p.p\) exists and is black,
+            \item [Case 1: \(\mathbf{z}\)'s uncle \(\mathbf{y}\) is red. ]
+                Since both \(z.p\) and \(y\) are red, and \(z.p.p\) exists and is black,
                 we simply ``push'' the redness upward and call \lstinline{RB-Insert-Fixup} on 
-                \(x.p.p\). That is, we recolor \(x.p\) and \(y\) black, 
-                while recoloring \(x.p.p\) red.
+                \(z.p.p\). That is, we recolor \(z.p\) and \(y\) black, 
+                while recoloring \(z.p.p\) red.
 
-            \item [Case 2: \(\mathbf{x}\)'s uncle \(\mathbf{y}\) is black and \(\mathbf{x}\) is a right child.]
-                To be considered a subcase of Case 3, we simply call \lstinline{Left-Rotate} on \(x\)
+            \item [Case 2: \(\mathbf{z}\)'s uncle \(\mathbf{y}\) is black and \(\mathbf{z}\) is a right child.]
+                To be considered a subcase of Case 3, we simply call \lstinline{Left-Rotate} on \(z\)
                 and fall into Case 3.
 
-            \item [Case 3: \(\mathbf{x}\)'s uncle \(\mathbf{y}\) is black and \(\mathbf{x}\) is a left child].
+            \item [Case 3: \(\mathbf{z}\)'s uncle \(\mathbf{y}\) is black and \(\mathbf{z}\) is a left child].
                 Either it is accessed directly or through Case 2, 
-                we simply call \lstinline{Right-Rotate} on \(x\) and apply some recoloring.
+                we simply call \lstinline{Right-Rotate} on \(z\) and apply some recoloring.
         \end{description}
         The only property that may still fail is \Cref{prop:rb-prop-2}, 
         which a simple recoloring at the end of \lstinline{RB-Insert-Fixup} solves.

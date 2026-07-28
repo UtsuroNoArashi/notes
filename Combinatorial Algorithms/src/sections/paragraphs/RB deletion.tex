@@ -1,0 +1,51 @@
+\documentclass{subfiles}
+\begin{document}
+    Our discussion on RB deletion will assume the following:
+        for any node \(y\), \(x.r\) denotes \(x\)'s right child,
+        similarly \(x.l\) denotes the left child,
+        with \(x.p\) we indicate \(x\)'s parent and with \(x.c, x\) 's color.
+        Additionally, we denote with \(z\) the node to remove, 
+            with \(y\) the node the replaces the deleted node and we let it always point to \(z\),
+            and with \(x\) the node filling \(y\)'s position after this has been moved.
+
+    As for insertion, we mainly focus on the properties that may fail upon deletion,
+        and explain how these are fixed. 
+
+    First, if \(y\) was the root and a red child replaces it, \Cref{prop:rb-prop-2} fails.
+        Second, if \(x\) and \(x.p\) are both red, then \Cref{prop:rb-prop-4} fails.
+        Third, moving \(y\) may cause \Cref{prop:rb-prop-5} to fail.
+        We can correct the violation of \Cref{prop:rb-prop-5} by saying that node x,
+        now occupying y’s original position, has an ``extra'' black.
+        That is, if we add 1 to the count of black nodes on any simple path
+        that contains x, then under this interpretation, property 5 holds. When we remove
+        or move the black node y, we “push” its blackness onto node x. 
+        The problem is that now node x is neither red nor black, thereby violating property 1.
+
+    \subfile{../TikZ/Procedure - RB deletion.tex}
+    
+    With respect to \autoref{proc:RB-deletion}, which shows the pseudo code to implement RB deletion,
+        we show how \lstinline{RB-Delete-Fixup} restores each of the RB properties.
+        \begin{description}
+            \item [Case 1: \(\mathbf{z}\)'s sibling \(\mathbf{w}\) is red.]
+                We know that \(w\)'s must be black, therefore we can exchange the colors of 
+                \(w\) and \(x.p\) and apply a left rotation on \(x.p\).
+
+            \item [Case 2: \(\mathbf{z}\)'s sibling \(\mathbf{w}\) is black, and so are its children.]
+                Since both \(w\)'s children are black, and so are \(z\) and \(w\),
+                we can simply pulling away a black from both, leaving \(z\) singly black and \(w\)
+                red.
+
+            \item [Case 3: \(\mathbf{z}\)'s sibling \(\mathbf{w}\) is black,
+                \(\mathbf{w.l}\) is red and \(\mathbf{w.r}\) is black.]
+                We can switch the colors of \(w\) and its left child \(w.l\)
+                    and then perform a right rotation on \(w\).
+
+            \item [Case 4: \(\mathbf{z}\)'s sibling \(\mathbf{w}\) is black, 
+                and \(\mathbf{w.r}\) is red.]
+                By making some color changes and performing a left rotation on \(x.p\),
+                we can remove the extra black on \(x\), making it singly black.
+        \end{description}
+        Upon termination \Cref{prop:rb-prop-2} may still fail,
+            which is fixed at the end of \lstinline{RB-Delete-Fixup}.
+            \subfile{../TikZ/Procedure - RB delete fixup.tex}
+\end{document}
