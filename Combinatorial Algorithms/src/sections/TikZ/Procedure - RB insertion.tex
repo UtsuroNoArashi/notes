@@ -2,7 +2,7 @@
 \documentclass{subfiles}
 \begin{document}
     \begin{procedure}
-        \caption{RB-Insert(T, z)}\label{proc:RB-insert}
+        \caption{RB-Insert(T, z)}\label{proc:RB-insertion}
         $ y = \KwNil $ \;\DontPrintSemicolon
         $ x = T.root $ \;\DontPrintSemicolon
         \While{$ x \ne \KwNil $}{
@@ -27,6 +27,6 @@
         $ z.left = \KwNil $ \;\DontPrintSemicolon
         $ z.right = \KwNil $ \;\DontPrintSemicolon
         $ z.color = $ ``Red'' \;\DontPrintSemicolon
-        Insert-fixup(T, z)
+        RB-Insert-Fixup(T, z)
     \end{procedure}
 \end{document}

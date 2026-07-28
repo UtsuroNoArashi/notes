@@ -2,7 +2,7 @@
 \documentclass{subfiles}
 \begin{document}
     \begin{procedure}
-        \caption{Insert-fixup(T, z)}\label{proc:RB-insert-fixup}
+        \caption{RB-Insert-Fixup(T, z)}
         \While{$ z.p.color == $ ``Red''}{
             \uIf{$ z.p == z.p.p.left $}{
                 $y = z.p.p.right$ \;\DontPrintSemicolon
@@ -21,20 +21,7 @@
                 }
             }
             \uElse{
-                $y = z.p.p.left$ \;\DontPrintSemicolon
-                \uIf{$ y.color == $ ``Red''}{
-                    $ z.p.color = $ ``Black'' \;\DontPrintSemicolon
-                    $ y.color = $ ``Black'' \;\DontPrintSemicolon
-                    $ z.p.p.color = $ ``Red'' \;\DontPrintSemicolon
-                    $ z = z.p.p $ \;\DontPrintSemicolon
-                }
-                \uElseIf{$ z == z.p.left $}{
-                    \Indp$ z = z.p $ \;\DontPrintSemicolon
-                    Rotate-right(T, z) \;\DontPrintSemicolon
-                    \Indm$ z.p.color = $ ``Black'' \;\DontPrintSemicolon
-                    $ z.p.p.color = $ ``Red'' \;\DontPrintSemicolon
-                    Rotate-left(T, z.p.p) \;\DontPrintSemicolon
-                }
+                \tcc{Likewise with "right" and "left" swapped.}
             }
         }
         $ T.root.color = $ ``Black''
