@@ -1,0 +1,20 @@
+\documentclass{subfiles}
+\begin{document}
+    At least in principle, hashing is very simple: 
+        we use function \(h : K \to \set{0, 1, m - 1}\), where \(m = \abs{T}\),
+        to map each of the keys in \(k\) to one of the slots in \(T\).
+
+    It comes with no surprise that any two keys \(k, l \in K\) can be such that \(h(k) = h(l)\).
+        If this happens, we say that a collision has occured. 
+        Therefore we need a way to handle collisions. The literature provides several solutions,
+        the simplest of which is \emph{chaining}. Under chaining each slot \(i\) points to a list \(L_{i}\),
+        which in turns stores all the keys in \(K\) that maps to \(i\).
+        In other words, for each \(i\)
+        \[
+            L_{i} = \set{k \in k \text{ s.t. } h(k) = i}.
+        \]
+
+    From what just discussed,
+        it follows that we are interested in finding hash functions to minimise collisions.
+        A class of such functions is discussed in the following section.
+\end{document}

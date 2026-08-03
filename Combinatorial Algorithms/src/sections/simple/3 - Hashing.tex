@@ -1,0 +1,16 @@
+\documentclass{subfiles}
+\begin{document}
+    We have seen how trees and lists can be used to implent dictionaries.
+        Now we discuss another way to implent dictionaries when the set of possible keys \(K\)
+        is much greater than the number of key that can be stored.
+        In other words, when \(\abs{K} \gg \abs{T}\), 
+        where \(T\) is the structure used to store the keys.
+
+    In this section, we first recall the idea behind hashing, 
+        we then introduce the notion of universal hash function,
+        and show how, under some reasonable assumptions,
+        we can achive a \(\ofO{1}\) time for any of the dictionary operations.
+
+    \subsection{What is hashing?}
+    \subfile{../sub/3.1 - The idea behind hashing}
+\end{document}
