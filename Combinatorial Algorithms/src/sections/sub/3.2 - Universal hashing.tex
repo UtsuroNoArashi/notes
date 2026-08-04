@@ -1,0 +1,52 @@
+\documentclass{subfiles}
+\begin{document}
+    Consider the case in which the keys are choosed in such a way that, after the hashing,
+        the average retrival time is \(\ofT{n}\), a situation that can happen with a non-zero 
+        probability. The use of fixed hash functions may lead to such situations.
+        A simple solution, is that of choosing the hash function at random from a family of well-designed 
+        hash functions.
+
+    Here, we first show why this kind of solution works, 
+        then, we show how to one of such families is defined.
+
+    Let \(\H\) be a finite collection of hash functions. 
+        We say that \(\H\) is universal if, for any pair of keys \(k, l \in K\), 
+        the number of hash function such that \(h(k) = h(l)\) is no more than \(\sfrac{\abs{\H}}{m}\).
+        In other words, \(\H\) is universal if the probability of a collision is less than \(\sfrac{1}{m}\).
+
+    The following theorem shows that universal has functions give a good-average case.
+    \begin{theorem}
+        Let \(h\) be a function that has been used to hash \(n\) keys into the table \(T\) of size \(m\).
+            If key \(k\) is not in the table, then the expected lenght of the list \(k\) hashes to is at most
+            \(\sfrac{n}{m} = \alpha\). Viceversa, if key \(k\) is in the table, 
+            the expected lenght of the list storing \(k\) is at most \(1 + \alpha\).
+    \end{theorem}
+    \begin{proof*}
+        Let \(X_{kl}\) be the indicator random variable \(I\set{h(k) = h(l)}\).
+            By definition of universal universal collection of hash functions,
+            \(\Prob{h(k) = h(l)} \le \sfrac{1}{m}\). By a simple result in probability theory,
+            we know \(\E[X_{kl}]{} \le \sfrac{1}{m}\).
+
+        Let \(Y_{k}\) denote the number of keys \(l \ne k\) that maps to the same slot as \(k\).
+        We have
+        \[\begin{aligned}
+            \E[Y_{k}]{} & = \E[\sum_{l \in K, l \ne k}]{} \\ 
+                     & = \sum_{l \in K, l \ne k} \E[X_{kl}]{} \\ 
+                     & \le \sum_{l \in K, l \ne k} \frac{1}{m}                  
+        \end{aligned}\]
+        
+        If \(n_{h(k)}\) is the lenght of the list \(k\) hashes to, then 
+        \begin{itemize}
+            \item if \(k \notin T\), then \(\E[n_{h(k)}]{} = \E[Y_{k}]{}\) and 
+                \(\abs{\set{l}[l \in T \land l \ne k]} = n\).
+                Therefore, \(\E[n_{h(k)}]{} \le \sfrac{n}{m} = \alpha\).
+
+            \item if \(k \in T\), then \(\E[n_{h(k)}]{} = \E[Y_{k}]{} + 1\) and
+                \(\abs{\set{l}[l \in T \land l \ne k]} = n - 1\).
+                Hence, \(\E[n_{h(k)}]{} \le (n - 1) / m  + 1 = 1 + \alpha - \sfrac{1}{m}  \le 1 + \alpha\)
+        \end{itemize}\qed
+    \end{proof*}
+
+    \subsubsection{Designing a universal class of hash functions}
+    \subfile{../subsub/3.2.1 - Designing a universal class of hash functions}
+\end{document}

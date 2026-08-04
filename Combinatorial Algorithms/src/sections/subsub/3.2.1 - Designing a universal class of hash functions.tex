@@ -1,0 +1,37 @@
+\documentclass{subfiles}
+\begin{document}
+    We start by choosing a prime number \(p\) such that all possible key fall in the range 
+        \((0, p - 1)\). Consider the group \(\zset_{p}\) and \(\zset_{p}^{*}\).
+        Since \(p\) is prime we can solve equations modulo \(p\). 
+    
+    For any \(a \in \zset_{p}^{*}\) and \(b \in \zset_{p}\), 
+        let \(h_{ab}\) be the  function defined as follow:
+        \[
+            h_{ab}(k) =  ((ak + b) \mod p) \mod m
+        \]
+        and let \(\H_{pm}\) be the class of all such functions.
+    
+    \begin{theorem}
+        The family of hash functions \(\H_{pm}\) is universal.
+    \end{theorem}
+    \begin{proof*}
+        For any two distinct keys \(k, l \in \zset_{p}\), and an hash function \(h_{ab}\) we have 
+            \[\begin{gathered}
+                h_{ab}(k) = r = ((ak + b) \mod p) \mod m \\ 
+                h_{ab}(l) = s = ((al + b) \mod p) \mod m
+            \end{gathered}\]
+            Some simple algebra shows that \(r \ne s\). Hence,
+            at the modulo \(p\) level no collision can occur.
+
+        Therefore, the probability that two keys hash to the same value coicide with
+            the probability that \(r \equiv s \mod m\). Now, if \(r\) and \(s\) are chosen at random 
+            from \(\zset_{p}\), for a fixed value of \(r\),
+            the number of values for \(s\) such that \(s \ne p\) and \(s \equiv p \mod m\) is at most
+            \[\begin{aligned}
+                \ceil{\sfrac{p}{m}} - 1 & \le (\sfrac{(p + m - 1)}{m}) - 1 \\ 
+                & = \sfrac{(p - 1)}{m}.
+            \end{aligned}\]
+            Meaning that the probability that \(r \equiv s \mod m\) is at most \(\sfrac{\sfrac{(p - 1)}{m}}{(p - 1)} = \sfrac{1}{m}\).
+            Hence, \(\Prob{h_{ab}(k) = h_{ab}(l)} \le \sfrac{1}{m}\), and thus \(\H_{pm}\) is universal.
+    \end{proof*}
+\end{document}

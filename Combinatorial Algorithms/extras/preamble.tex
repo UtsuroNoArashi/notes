@@ -20,7 +20,11 @@
 }
 
 \DeclareDocumentCommand{\E}{O{p} m}{
-    \mathbb{E}_{ #2 } \lparen #1 \rparen
+    \mathbb{E}_{ #2 } \left\lparen #1 \right\rparen
+}
+
+\DeclareDocumentCommand{\H}{}{
+    \ensuremath{\mathcal{H}}
 }
 
 % BibTeX files 
