@@ -1,0 +1,84 @@
+\documentclass{subfiles}
+\begin{document}
+    So far we have considered the case in which the set of keys \(K\) was dynamic.
+        We now turn our attention to the case in which \(K\) is static,
+        and we show that in this case a constant time lookup worst case is achiveable.
+
+    The scheme we are about to discuss is often refferred to as \emph{perfect hashing}.
+        The idea is the following: we use a two level schema in which,
+        by means of a hash function \(h\) randomly choosed from a family of universal hash functions,
+        each of the \(n\) keys is mapped to one of the \(m\) slots of the table.
+        Each slot \(j\) stores a secondary hash table of size \(m_{j} = n_{j}^{2}\) 
+        to which is associate a hash function \(h_{j}\), 
+        where \(n_{j}\) is the number of keys mapping to \(j\).
+    
+    Assume that the first level hash function comes from \(\H_{pm}\), 
+        while each of the secondary level hash functions come from \(\H_{pm_{j}}\).
+        We show that, choosing \(h_{j}\) carefully we can garantee that no collision will occur.
+        Additionally, we show that the overall space required by both the primary table 
+        and the secondary one is amounts to \(\ofO{n}\).
+        The following theorems and corollary will do the work.
+
+    \begin{theorem*}
+        Let \(h\) be a universal hash function, and let \(m = n^{2}\) be the size of a hash table 
+            used to store a static set of keys \(K\) of size \(n\). Then,
+            the probability of a collision occuring is les than \(\sfrac{1}{2}\).
+    \end{theorem*}
+    \begin{proof}
+        Since \(h\) is a universal hash function, any two keys collide with probability \(\sfrac{1}{m}\).
+            The number of possible pair that may collide is \(\binom{n}{2}\).
+            If \(X\) is a random variable that counts the number of collisions, 
+            then 
+            \[\begin{aligned}
+                \E[X]{} & = \binom{n}{2} \frac{1}{m} \\
+                        & = \binom{n}{2} \frac{1}{n^{2}} && \text{ since \(m = n^{2} \)}\\ 
+                        & = \frac{n^{2} - n}{2} \frac{1}{n^{2}} \\ 
+                        & < \frac{1}{2} && \text{as \(n \to \infty\)}
+            \end{aligned}\]
+    \end{proof}
+
+    \begin{theorem*}
+        Let \(h\) be a hash function randomly chosen from a family of universal hash functions,
+            and assume we store \(n\) keys in a table of size \(m = n\).
+            Then, it holds
+            \[
+                \E[\sum_{i = 0}^{m - 1} n_{j}^{2}]{} < 2,
+            \]
+            \(n_{j}\) being the number of keys hashing to \(j\).
+    \end{theorem*}
+    \begin{proof}
+        By a simple induction we have that the following relation holds for every non-negative integer:
+        \[
+            k^{2} = k + 2\binom{k}{2}.
+        \]
+
+        It follows 
+        \[\begin{aligned}
+            \E[\sum_{i = 0}^{m - 1} n_{j}^{2}]{} & =
+                \E[\sum_{i = 0}^{m - 1} n_{j}]{} +
+                2\E[\sum_{i = 0}^{m - 1} \binom{n_{j}}{2}]{} && \text{by the linearity of expectation} \\ 
+                & = \E[n]{} + 2\E[\sum_{i = 0}^{m - 1} \binom{n_{j}}{2}]{} \\ 
+                & = n + 2\E[\sum_{i = 0}^{m - 1} \binom{n_{j}}{2}]{} && \text{since \(n\) is not a random variable}
+        \end{aligned}\]
+        Now, recall that \(h\) is a universal hash function, hence 
+        \[\begin{aligned}
+            \E[\sum_{i = 0}^{m - 1} \binom{n_{j}}{2}]{} & \le \binom{n}{m}\frac{n}{m}  \\ 
+                & = \frac{n(n - 1)}{2m} \\
+                & = \frac{n - 1}{2}
+        \end{aligned}\]
+        since \(m = n\). Therefore, 
+        \[
+            \E[\sum_{i = 0}^{m - 1} n_{j}^{2}]{} \le n + 2 \frac{n - 1}{2} < 2n
+        \]
+    \end{proof}
+    \begin{corollary*}
+        Let \(h\) be a hashing function randomly chosen from a family of universal hash functions,
+            and assume we store \(n\) keys in an hash table of size \(m = n\),
+            and we set the size of each secondary hash table to \(m_{j} = n^{2}_{j}\).
+            Then, under a perfect hashing schema, the amount of space required is no more than \(2n\).
+    \end{corollary*}
+    \begin{proof}
+        Follows immediately from the previous theorem.
+    \end{proof}
+
+\end{document}
