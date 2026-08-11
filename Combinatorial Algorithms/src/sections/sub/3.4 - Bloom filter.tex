@@ -1,0 +1,56 @@
+\documentclass{subfiles}
+\begin{document}
+    We now turn our attention to the following problem:
+        given a set \(M\) of items, how can we efficiently store the items in \(M\),
+        while also being able to immediately tell if an item \(i \in M\)?
+        That is, is it possible to determine if \(i \notin M\) by simply looking at the data structure?
+
+    By now, it should be clear that such a problem is easily solved through hashing,
+        with the only issue concerning space. In fact, if the space available for the hast table
+        is much less than that actually needed, the usual hashing approach is infeasable.
+
+    Here, a slightly different approach is discussed. In more details,
+        we will overview the solution proposed in \cite{Bloom1970} by \citeauthor{Bloom1970},
+        and refer the interested reader to the paper for major details.
+        We focus on what in \cite{Bloom1970} is referred to as ``Method 2'';
+        commonly known as Bloom's filter in the literature.
+
+    The idea is the following: we represent our hash table as a collection of \(N\) individually
+        addressable bits, initially set to zero. If \(M\) is the set of items to store,
+        then for each item \(k \in M\) we identify a group of bits \(b_{1}, b_{2}, \ldots, b_{d}\),
+        by means of some hash procedure, and set these to one.
+        Similarly, if \(i\) is some item we wish to check belongs to the set,
+        then we compute the hash for \(i\) and check if all the bits (in the hash) are set to one.
+
+    \begin{remark*}
+        It should be clear that, if for a given item \(k\), 
+            all the bits in its hashing are set to one, then there's no guarantee that \(k\) belongs to the set.
+            On the contrary, if any of the bits in the hashing is set to zero,
+            then we are sure \(k\) doesn't belong to the set.
+
+        Stated differently, we allow some items to be falsely recognized as belonging to the set,
+            to immediately discard those items that do not.
+            We refer to these falsely recognized items as the \emph{allowable fraction of error}.
+    \end{remark*}
+
+    We now proceed with the analysis of Bloom's filter.
+        Let \(\phi\) be the expected proportion of bits still set to zero after \(n\) items 
+        have been stored, and let \(d\) be the fixed number of bits set for each.
+        Then 
+        \[
+            \phi = (1 - \sfrac{d}{N})^{n}
+        \]
+        It follows that an item is falsely recognized if all \(d\) bits are set to one,
+        which happens with probaility \(P = (1 - \phi)^{d}\).
+
+        If we assume \(d \ll N\), and we take the log base 2 of \(\phi\) we get approximately 
+        \[\begin{aligned}
+            \log_{2} \phi & =  \ln (1 - \sfrac{d}{N})^{n} \log_{2} (e) \\ 
+                    & = -n (\sfrac{d}{N}) \log_{2} (e).
+        \end{aligned}\]
+
+    Therefore
+    \[
+        N = -n\log_{2} (P) \frac{\log_{2} (e)}{\log_{2} (\phi) \log_{2} (1 - \phi) }
+    \]
+\end{document}
