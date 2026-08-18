@@ -1,0 +1,35 @@
+\documentclass{subfiles}
+\begin{document}
+    Consider the following scenario. 
+        We are given a huge amount of data, which cannot be stored due to the volume.
+        Our goal is that of processing such data to derive some statistics.
+
+    Achiving such a goal isn't trivial; in fact, we have to change the usual model of 
+        computation in favor of a streaming one.
+        The idea is the following: we are given a sequence \(\sigma = \iprod{\sigma_{1}, \sigma_{2}, \ldots, \sigma_{m}}\)
+        of tokens, each belonging to the same universe \(U\).
+        The goal is to compute some function \(\Phi(\sigma)\) on the input stream.
+
+    The simplest streaming model, the so-called \emph{vanilla} streaming model,
+        assumes that the size of the universe \(U\), often treated as and integer universe
+        (\(U = \set{0, \ldots, n - 1}\)), is known a priori, while the size of the stream 
+        is unknown; therefore it requires that after each tokens is processed,
+        we are able to return some value for \(\Phi(\sigma)\).
+
+    As we shall see, is often useful to mantain a \emph{frequency vector} \(F_{\sigma}\),
+        that keeps track of the number of occurrences of each token in the stream.
+        In other words, \(F_{\sigma}[j]\) stores the number of occurrences of \(j\) in the stream.
+
+    The analisis of a streaming algorithm differs a bit from the one usually done for algorithms.
+        First, when it comes to storage, this is measured in terms of number of bits used 
+        instead of by the number of elementary elements begin stored. Ideally,
+        a streaming algorithm should use \(\ofO{\log(n + m)}\) bits of storage. 
+        Second, the output of the algorithm often differs from the exact value of \(\Phi(\sigma)\).
+        Hence another concern is the \emph{quality of the answer}.
+        Furthermore, many streaming algorithms use \emph{randomization}, and may sometimes report an
+        answer that does not lie within the desired error bounds. In such cases 
+        the probability with which the algorithm gives a good approximation.
+
+    \subsection{Frequent object}
+    \subfile{../sub/4.1 - Frequent object}
+\end{document}
