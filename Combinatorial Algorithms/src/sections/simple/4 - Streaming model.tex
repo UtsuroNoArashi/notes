@@ -1,35 +1,38 @@
 \documentclass{subfiles}
 \begin{document}
-    Consider the following scenario. 
-        We are given a huge amount of data, which cannot be stored due to the volume.
-        Our goal is that of processing such data to derive some statistics.
+    Let us now focus our attention to a different problem:
+        consider a scenario in which we have a huge amount of data that needs to be processed,
+        and for a reason or another, we cannot store them. How should we proceed?
 
-    Achiving such a goal isn't trivial; in fact, we have to change the usual model of 
-        computation in favor of a streaming one.
-        The idea is the following: we are given a sequence \(\sigma = \iprod{\sigma_{1}, \sigma_{2}, \ldots, \sigma_{m}}\)
-        of tokens, each belonging to the same universe \(U\).
-        The goal is to compute some function \(\Phi(\sigma)\) on the input stream.
+    A solution is to use \emph{straming}, which we desribe in this section.
+        The idea is that of treating the data as a sequence of tokens
+        \(\sigma = \iprod{\sigma_{1}, \ldots, \sigma_{m}}\), belonging to some fixed universe \(U\).
+        For the sake of simplicity, here we assume \(U\) to be an integer universe of size \(n\),
+        ranging from \(0\) to \(n - 1\).
+        The goal is that of computing a function \(\Phi(\sigma)\) on input stream.
 
-    The simplest streaming model, the so-called \emph{vanilla} streaming model,
-        assumes that the size of the universe \(U\), often treated as and integer universe
-        (\(U = \set{0, \ldots, n - 1}\)), is known a priori, while the size of the stream 
-        is unknown; therefore it requires that after each tokens is processed,
-        we are able to return some value for \(\Phi(\sigma)\).
+    Straming provides several models of computation,
+        the simplest of which is the so-called \emph{vanilla} model;
+        with it, the size of the universe is assumed to be known a priori,
+        while on the contrary, the size of the stream is unknown. For these reasons,
+        after a token is read we should be able to report some information about \(\Phi(\sigma)\).
 
-    As we shall see, is often useful to mantain a \emph{frequency vector} \(F_{\sigma}\),
-        that keeps track of the number of occurrences of each token in the stream.
-        In other words, \(F_{\sigma}[j]\) stores the number of occurrences of \(j\) in the stream.
+    In most cases the order in which tokens arrive has no influence on the value of \(\Phi(\sigma)\),
+        and is often convenient to use a frequency vector \(F_{\sigma} = [0, \ldots, n - 1]\),
+        that in \(F_{\sigma}[j]\) stores the number of occurrences of \(j\) in the stream,
+        for all \(j \in U\).
 
-    The analisis of a streaming algorithm differs a bit from the one usually done for algorithms.
-        First, when it comes to storage, this is measured in terms of number of bits used 
-        instead of by the number of elementary elements begin stored. Ideally,
-        a streaming algorithm should use \(\ofO{\log(n + m)}\) bits of storage. 
-        Second, the output of the algorithm often differs from the exact value of \(\Phi(\sigma)\).
-        Hence another concern is the \emph{quality of the answer}.
-        Furthermore, many streaming algorithms use \emph{randomization}, and may sometimes report an
-        answer that does not lie within the desired error bounds. In such cases 
-        the probability with which the algorithm gives a good approximation.
+    In the next few sections we introduce a few algorithms that use straming,
+        and in doing so we focus on their analisis.
+        Hence the question on how straming algorithm are analized.
+        First, when it comes to spatial analisis,
+        straming algorithm are measured in terms of bits used instead of by the number of elementary 
+        items stored. Second, the temporal analisis concernes the time needed to process each token,
+        rather then that needed for the whole sequence. Third, several straming algorithm,
+        as we shall see in \Cref{sec:randomized-streaming} use randomization,
+        which has no garantee to provide a solution within the desired error bound.
+        In such cases, we also care of the probability with which the algorithm gives a good approximation.
 
-    \subsection{Frequent object}
+    \subsection{Frequent item}
     \subfile{../sub/4.1 - Frequent object}
 \end{document}

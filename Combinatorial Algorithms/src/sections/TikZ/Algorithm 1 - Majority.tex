@@ -1,0 +1,27 @@
+\documentclass{subfiles}
+\begin{document}
+    \begin{algorithm}
+        \TitleOfAlgo{Majority}\label{alg:majority}
+        \KwIn{A stream $\sigma = \iprod{\sigma_{1}, \ldots, \sigma_{m}}$.}
+        \KwOut{The set of majority items $I$.}
+        $I \leftarrow \emptyset$ \DontPrintSemicolon\;
+        \ForEach{$\sigma_{i} \in \sigma$}{
+            \uIf{$\sigma_{i} \in I$}{
+                $c(\sigma_{i}) \leftarrow c(\sigma_{i}) + 1$
+            }
+            \Else{
+                $ I \leftarrow I \cup \set{\sigma_{i}}$ \DontPrintSemicolon\;
+                $c(\sigma_{i}) \leftarrow 1$ \DontPrintSemicolon\;
+                \If{$\abs{I} > \sfrac{1}{\varepsilon}$}{
+                    \ForEach{$\tau_{j} \in I$}{
+                        $c(\tau_{i}) \leftarrow c(\tau_{i}) - 1$ \DontPrintSemicolon\;
+                        \If{$c(\tau_{j}) == 0$}{
+                            $I \leftarrow I \setminus \tau_{j} $
+                        }
+                    }
+                }
+            }
+        }
+        \Return $I$
+    \end{algorithm}
+\end{document}

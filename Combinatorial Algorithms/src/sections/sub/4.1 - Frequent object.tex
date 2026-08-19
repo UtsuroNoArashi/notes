@@ -1,0 +1,56 @@
+\documentclass{subfiles}
+\begin{document}
+    The first problem we introduce is that of finding frequents element in a stream.
+        More formally, given a stream \(\sigma = \iprod{\sigma_{1}, \ldots, \sigma_{m}}\) and \(0 < \varepsilon < 1\), 
+        we are asked to find the set \(I_{\varepsilon}(\sigma)\) that contains all 
+        the elements \(j\) in \(\sigma\) such that \(F_{\sigma}[j] \ge \varepsilon m\).
+        One of such elements is called \(\varepsilon\)-frequent, or \(\varepsilon\)-heavy hitter in \(\sigma\).
+
+    When \(\varepsilon = \sfrac{1}{2}\), an \(\varepsilon\)-frequent token is also called a \emph{majority} item.
+        A variant of the above problem, is therefore that of deciding whether a stream has 
+        a majority item.
+
+    Although the two problems appear to be easy, even in the vanilla model,
+        the space required to solve them cannot be exactly sub-linear, 
+        as proved by the following theorem.
+
+    \begin{theorem*}
+        Any deterministic streaming algorithm that solves the majority problem exactly on
+        streams with \(m\) tokens over the universe \(U\), where \(m \le \sfrac{n}{2}\),
+        must use \(\ofW{m log(n/m)}\) bits of storage, even in the vanilla streaming model.
+    \end{theorem*}
+    \begin{proof}
+        Our proof is more of a sketch, some more rigorous proof are easely found online. 
+        Let \(s\) be the number of bits used by an algorithm to solved the majority problem,
+        then at any given time the algorithm can be in \(2^{s}\) different states.
+        On the other hand, the number of possible different frequency vector is 
+        \[
+            \binom{n + \sfrac{m}{2} - 1}{n -1} =
+            \binom{n + \sfrac{m}{2} - 1}{\sfrac{m}{2}} 
+            \ge 2^{(\sfrac{m}{2})\log(2\sfrac{(n + \sfrac{m}{2} - 1)}{m}) }
+        \]
+        Hence, when \(s < (\sfrac{m}{2})\log(2\sfrac{(n + \sfrac{m}{2} - 1)}{m}) \) 
+        there must exist two sequences \(t_{1} \ne t_{1}'\) such that the algorithm would 
+        be in the same state when processing either of the two sequences.
+        Then, ther exist a sequence \(t_{2}\) such that \(t_{1} \circ t_{2}\)
+        contains a majority item \(j\), while \(j\) is not a majority item in \(t_{1}' \circ t_{2}\).
+        It follows that the algorithm would report the same answer for both cases, 
+        since it is the same state after processing either of sequences.
+        But it is incorrect, since \(j\) is a majority item for \(t_{1} \circ t_{2}\)
+        and not for \(t_{1}' \circ t_{2}\).
+    \end{proof}
+
+    Despite the result given by the above theorem, 
+        it can be proved that the majority proble can be solved using \(\ofO{\log (m + n}\) bits.
+        The idea underlying the algorithm we present is the following: suppose that,
+        given a sequence of numbers, we repeatedly delete any pair of adjacent and distinct numbers,
+        until either all remaining numbers are equal or the sequence has become empty. 
+        Then the remaining number, if any, is the only candidate for a majority item.
+        The algorithm in \Cref{alg:majority} works as follow: given a threshold \(\varepsilon\),
+        it maintains a set \(I\) that is guaranteed to have all \(\varepsilon\)-frequent 
+        elements, where \(\abs{I} < \sfrac{1}{\varepsilon}\). For each element in
+        the set, it maintains a counter \(c(j)\) to keep track of the occurrences of \(j\).
+
+    \subfile{../TikZ/Algorithm 1 - Majority}
+
+\end{document}
