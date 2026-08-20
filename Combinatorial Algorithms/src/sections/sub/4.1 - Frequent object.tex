@@ -52,5 +52,43 @@
         the set, it maintains a counter \(c(j)\) to keep track of the occurrences of \(j\).
 
     \subfile{../TikZ/Algorithm 1 - Majority}
+    We now show the output \(I\) reported by \Cref{alg:majority} is a superset of \(I_{\varepsilon}(\sigma)\).
+        To do so, let us consider consider the estimate \(\tilde{F}_{\sigma}[j]\) for all \(j\),
+        defined as follow:
+        \[
+            \tilde{F}_{\sigma}[j] = \begin{cases}
+                c(j), \text{ if } j \in I \\ 
+                0, \text{ otherwise. }
+            \end{cases}
+        \]
+        The quality of the estimate is proved by the following theorem.
+        \begin{theorem*}
+            For any \(j \in U\) one has
+            \[
+                \max(0, F_{\sigma}[j] - \varepsilon m) \le \tilde{F}_{\sigma}[j] \le F_{\sigma}[j].
+            \]
+        \end{theorem*}
+        The above theorem, whose proof is somewhat immediate, implies that any \(\varepsilon\)-frequent
+        item must have \(\tilde{F}_{\sigma}[j] \ge 0\). 
+        Equivalently, if \(j\) is a \(\varepsilon\)-frequent element, then \(j \in I\).
 
+    Lastly, we show that the space required by an algorithm that solves majority is no more than 
+        \(\ofO{\sfrac{1}{\varepsilon} \log(n + m)}\) bits.
+        \begin{lemma}
+            Let \(\varepsilon\) be a given parameter such that \(0 < \varepsilon < 1\).
+            Then, there exist a streaming algorithm that uses \(\ofO{\sfrac{1}{\varepsilon} \log(n + m)}\) bits,
+            and that given a stream \(\sigma = \iprod{\sigma_{1}, \ldots, \sigma_{m}}\) in the vanilla model,
+            that computes for eaach \(j \in U\) an estimate \(\tilde{F}_{\sigma}[j]\) with 
+            \[
+                \max(0, F_{\sigma}[j] - \varepsilon m) \le \tilde{F}_{\sigma}[j] \le F_{\sigma}[j].
+            \]
+            In particular the set with non-zero estimate, contains all \(\varepsilon\)-frequent elements.
+        \end{lemma}
+        \begin{proof}
+            The bound for the estimate follow from the previous theorem.
+            Recall that \Cref{alg:majority} mantains a set of at most \(\sfrac{1}{\varepsilon}\)
+            item, each needing \(\ofO{\log n}\) bits to be stored.
+            Additionally, each item is provided with a counter which needs \(\ofO{\log m}\) bits of storage.
+            The bound follows.
+        \end{proof}
 \end{document}
