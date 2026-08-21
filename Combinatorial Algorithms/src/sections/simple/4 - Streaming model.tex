@@ -4,7 +4,7 @@
         consider a scenario in which we have a huge amount of data that needs to be processed,
         and for a reason or another, we cannot store them. How should we proceed?
 
-    A solution is to use \emph{straming}, which we desribe in this section.
+    A solution is to use \emph{streaming}, which we desribe in this section.
         The idea is that of treating the data as a sequence of tokens
         \(\sigma = \iprod{\sigma_{1}, \ldots, \sigma_{m}}\), belonging to some fixed universe \(U\).
         For the sake of simplicity, here we assume \(U\) to be an integer universe of size \(n\),
@@ -22,17 +22,20 @@
         that in \(F_{\sigma}[j]\) stores the number of occurrences of \(j\) in the stream,
         for all \(j \in U\).
 
-    In the next few sections we introduce a few algorithms that use straming,
+    In the next few sections we introduce a few algorithms that use streaming,
         and in doing so we focus on their analisis.
-        Hence the question on how straming algorithm are analized.
+        Hence the question on how streaming algorithm are analized.
         First, when it comes to spatial analisis,
-        straming algorithm are measured in terms of bits used instead of by the number of elementary 
+        streaming algorithm are measured in terms of bits used instead of by the number of elementary 
         items stored. Second, the temporal analisis concernes the time needed to process each token,
-        rather then that needed for the whole sequence. Third, several straming algorithm,
+        rather then that needed for the whole sequence. Third, several streaming algorithm,
         as we shall see in \Cref{sec:randomized-streaming} use randomization,
         which has no garantee to provide a solution within the desired error bound.
         In such cases, we also care of the probability with which the algorithm gives a good approximation.
 
     \subsection{Frequent item}
     \subfile{../sub/4.1 - Frequent object}
+
+    \subsection{Randomized streaming}
+    \subfile{../sub/4.2 - Randomized streaming}
 \end{document}

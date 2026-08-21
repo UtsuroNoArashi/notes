@@ -1,0 +1,50 @@
+\documentclass{subfiles}
+\begin{document}
+    Our algorithm assume the existence of a function \lstinline{Random(a, b)},
+        that for any integers \(a, b\) gives a uniformely distributed random integer \(r\)
+        in the range \([a, b]\). We also assume \lstinline{Random(a, b)} to run in \(\ofO{1}\).
+
+    Let \(\sigma = \iprod{\sigma_{1}, \ldots, \sigma_{m}}\) be a stream of distint tokens.
+        We say that the \emph{rank} of \(\sigma_{i}\) is the number of elements in \(\sigma\)
+        smaller the \(\sigma_{i}\), plus 1:
+        \[
+            \rank(\sigma_{i}) = 1 + \abs{\set{ \sigma_{i}' \in \sigma}[\sigma_{i}' < \sigma_{i}]}.
+        \]
+        We call median an item whose rank is either \(\ceil{\sfrac{m + 1}{2}}\) or 
+        \(\floor{\sfrac{m + 1}{2}}\). The algorithm we describe tries to solve the following problem:
+        given a stream \(\sigma\) of \(m\) distinct tokens over the universe \(U\),
+        compute the median of \(\sigma\).
+
+    Let us consider the following naive solution: let us set \(r = \) \lstinline{Random(1, m)},
+        then our algorithm returns \(\sigma_{r}\) as the median element.
+        The algorithm takes \(\ofO{\log(n + m)}\), 
+        although the length of the stream needs to be known a priori.
+
+    This simple algorithm is far from a good algorithm. 
+        Let us observe in fact that, if \(X = \rank(\sigma_{i})\) is a random variable,
+        one has that 
+        \[
+            \E[X]{} = \sum_{ i = 1 }^{m} i \cdot \log\frac{1}{m} = \frac{m + 1}{2}.
+        \]
+        Although the expected value of the reported item is what we would hope for,
+        this is not enough. Indeed, if we would always report the largest (or the smallest) 
+        item in the stream, the expectation would still be the same but the item 
+        would be far from the median.
+
+    Thus, we need a way to determine how close the reported item is to the median.
+        We do so, by considering the following quantity:
+        \[
+            \floor*{\left\lparen\frac{1}{2} - \varepsilon\right\rparen (m + 1)}
+                \le \rank(\sigma_{i})
+                \le \ceil*{\left\lparen\frac{1}{2} + \varepsilon\right\rparen (m + 1)}
+        \]
+        where \(0 \le \varepsilon \le \sfrac{1}{2}\). An element that satisfies the
+        above equation is called an \(\varepsilon\)-approximate median.
+
+    To finish of, we now introduce a technique that significantly boost our success rate.
+        The idea is extreamly simple: we run the algorithm \(k\) times,
+        and report the median of the \(k\) execution as the median of the whole stream.
+        This simple trick, allows to define an algorithm that takes \(\ofO{k \log(n + m)}\)
+        bits of storage and reports an approximate median with a probability of 
+        \(1 - 2(\sfrac{e}{4})^{\sfrac{k}{4}}\).
+\end{document}
